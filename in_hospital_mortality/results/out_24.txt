@@ -1,0 +1,344 @@
+Namespace(data='/data/physician_notes/new_experiments/in_hospital_mortality_24/', period_length=24.0, save_model='/data/physician_notes/new_results/')
+Reading data and extracting features ...
+Finished reading training data ...
+Finished reading validation data ...
+Finished reading testing data ...
+  train data shape = (34082, 32172)
+  validation data shape = (6107, 32172)
+  test data shape = (7126, 32172)
+adding BOW features to all and note classifiers .....
+adding Structured features to all and all_but_note classifiers ......
+Training logistic model for unbalanced all features
+Now doing training on training set and hyperparameter tuning using the validation set...
+pipeline: ['union', 'lr']
+parameters:
+{'lr__C': array([3.125e-02, 6.250e-02, 1.250e-01, 2.500e-01, 5.000e-01, 1.000e+00,
+       2.000e+00, 4.000e+00, 8.000e+00, 1.600e+01, 3.200e+01])}
+Currently using parameter :
+{'lr__C': 0.03125}
+Currently using parameter :
+{'lr__C': 0.0625}
+Currently using parameter :
+{'lr__C': 0.125}
+Currently using parameter :
+{'lr__C': 0.25}
+Currently using parameter :
+{'lr__C': 0.5}
+Currently using parameter :
+{'lr__C': 1.0}
+Currently using parameter :
+{'lr__C': 2.0}
+Currently using parameter :
+{'lr__C': 4.0}
+Currently using parameter :
+{'lr__C': 8.0}
+Currently using parameter :
+{'lr__C': 16.0}
+Currently using parameter :
+{'lr__C': 32.0}
+done in 23718.872s
+Training logistic model for unbalanced structured features
+Now doing training on training set and hyperparameter tuning using the validation set...
+pipeline: ['union', 'lr']
+parameters:
+{'lr__C': array([3.125e-02, 6.250e-02, 1.250e-01, 2.500e-01, 5.000e-01, 1.000e+00,
+       2.000e+00, 4.000e+00, 8.000e+00, 1.600e+01, 3.200e+01])}
+Currently using parameter :
+{'lr__C': 0.03125}
+Currently using parameter :
+{'lr__C': 0.0625}
+Currently using parameter :
+{'lr__C': 0.125}
+Currently using parameter :
+{'lr__C': 0.25}
+Currently using parameter :
+{'lr__C': 0.5}
+Currently using parameter :
+{'lr__C': 1.0}
+Currently using parameter :
+{'lr__C': 2.0}
+Currently using parameter :
+{'lr__C': 4.0}
+Currently using parameter :
+{'lr__C': 8.0}
+Currently using parameter :
+{'lr__C': 16.0}
+Currently using parameter :
+{'lr__C': 32.0}
+done in 20982.448s
+Training logistic model for unbalanced note features
+Now doing training on training set and hyperparameter tuning using the validation set...
+pipeline: ['union', 'lr']
+parameters:
+{'lr__C': array([3.125e-02, 6.250e-02, 1.250e-01, 2.500e-01, 5.000e-01, 1.000e+00,
+       2.000e+00, 4.000e+00, 8.000e+00, 1.600e+01, 3.200e+01])}
+Currently using parameter :
+{'lr__C': 0.03125}
+Currently using parameter :
+{'lr__C': 0.0625}
+Currently using parameter :
+{'lr__C': 0.125}
+Currently using parameter :
+{'lr__C': 0.25}
+Currently using parameter :
+{'lr__C': 0.5}
+Currently using parameter :
+{'lr__C': 1.0}
+Currently using parameter :
+{'lr__C': 2.0}
+Currently using parameter :
+{'lr__C': 4.0}
+Currently using parameter :
+{'lr__C': 8.0}
+Currently using parameter :
+{'lr__C': 16.0}
+Currently using parameter :
+{'lr__C': 32.0}
+done in 756.809s
+Training logistic model for balanced all features
+Now doing training on training set and hyperparameter tuning using the validation set...
+pipeline: ['union', 'lr']
+parameters:
+{'lr__C': array([3.125e-02, 6.250e-02, 1.250e-01, 2.500e-01, 5.000e-01, 1.000e+00,
+       2.000e+00, 4.000e+00, 8.000e+00, 1.600e+01, 3.200e+01])}
+Currently using parameter :
+{'lr__C': 0.03125}
+Currently using parameter :
+{'lr__C': 0.0625}
+Currently using parameter :
+{'lr__C': 0.125}
+Currently using parameter :
+{'lr__C': 0.25}
+Currently using parameter :
+{'lr__C': 0.5}
+Currently using parameter :
+{'lr__C': 1.0}
+Currently using parameter :
+{'lr__C': 2.0}
+Currently using parameter :
+{'lr__C': 4.0}
+Currently using parameter :
+{'lr__C': 8.0}
+Currently using parameter :
+{'lr__C': 16.0}
+Currently using parameter :
+{'lr__C': 32.0}
+done in 30934.578s
+Training logistic model for balanced structured features
+Now doing training on training set and hyperparameter tuning using the validation set...
+pipeline: ['union', 'lr']
+parameters:
+{'lr__C': array([3.125e-02, 6.250e-02, 1.250e-01, 2.500e-01, 5.000e-01, 1.000e+00,
+       2.000e+00, 4.000e+00, 8.000e+00, 1.600e+01, 3.200e+01])}
+Currently using parameter :
+{'lr__C': 0.03125}
+Currently using parameter :
+{'lr__C': 0.0625}
+Currently using parameter :
+{'lr__C': 0.125}
+Currently using parameter :
+{'lr__C': 0.25}
+Currently using parameter :
+{'lr__C': 0.5}
+Currently using parameter :
+{'lr__C': 1.0}
+Currently using parameter :
+{'lr__C': 2.0}
+Currently using parameter :
+{'lr__C': 4.0}
+Currently using parameter :
+{'lr__C': 8.0}
+Currently using parameter :
+{'lr__C': 16.0}
+Currently using parameter :
+{'lr__C': 32.0}
+done in 29260.231s
+Training logistic model for unbalanced note features
+Now doing training on training set and hyperparameter tuning using the validation set...
+pipeline: ['union', 'lr']
+parameters:
+{'lr__C': array([3.125e-02, 6.250e-02, 1.250e-01, 2.500e-01, 5.000e-01, 1.000e+00,
+       2.000e+00, 4.000e+00, 8.000e+00, 1.600e+01, 3.200e+01])}
+Currently using parameter :
+{'lr__C': 0.03125}
+Currently using parameter :
+{'lr__C': 0.0625}
+Currently using parameter :
+{'lr__C': 0.125}
+Currently using parameter :
+{'lr__C': 0.25}
+Currently using parameter :
+{'lr__C': 0.5}
+Currently using parameter :
+{'lr__C': 1.0}
+Currently using parameter :
+{'lr__C': 2.0}
+Currently using parameter :
+{'lr__C': 4.0}
+Currently using parameter :
+{'lr__C': 8.0}
+Currently using parameter :
+{'lr__C': 16.0}
+Currently using parameter :
+{'lr__C': 32.0}
+done in 785.602s
+
+Using All features - unbalanced 
+ -----------------------------------------------------------------------------------
+
+Best score: 0.634
+Best parameters set:
+	lr__C: 0.25
+Mean test score:
+[0.6186534709367564, 0.6305640823142914, 0.6299263621571528, 0.634289600888133, 0.6301966077992743, 0.6325592843002023, 0.6310122582827684, 0.6293729169495684, 0.6300070636106129, 0.6300958054302847, 0.6320031589705473]
+ROC AUC Score on Test Set:
+0.8228925849080585
+Mortality @ K on Test Set:
+K = 10
+average rate:  0.10216110019646366
+0.5
+K = 50
+average rate:  0.10216110019646366
+0.8
+K = 100
+average rate:  0.10216110019646366
+0.81
+K = 500
+average rate:  0.10216110019646366
+0.472
+K = 1000
+average rate:  0.10216110019646366
+0.367
+Using All But Note features - unbalanced 
+ -----------------------------------------------------------------------------------
+
+Best score: 0.632
+Best parameters set:
+	lr__C: 0.25
+Mean test score:
+[0.6186534709367564, 0.6307460328237529, 0.630562742253256, 0.6320165595809003, 0.6287414504105946, 0.6299223419740468, 0.6261018279623688, 0.6279182062479005, 0.6267332945013424, 0.6284578041581201, 0.6231816860707504]
+ROC AUC Score on Test Set:
+0.8182944361046893
+Mortality @ K on Test Set:
+K = 10
+average rate:  0.10216110019646366
+0.5
+K = 50
+average rate:  0.10216110019646366
+0.8
+K = 100
+average rate:  0.10216110019646366
+0.79
+K = 500
+average rate:  0.10216110019646366
+0.462
+K = 1000
+average rate:  0.10216110019646366
+0.367
+Using Note features - unbalanced 
+ -----------------------------------------------------------------------------------
+
+Best score: 0.535
+Best parameters set:
+	lr__C: 32.0
+Mean test score:
+[0.5, 0.5, 0.5, 0.5, 0.5, 0.5016366612111293, 0.5071830249406204, 0.5133657687662148, 0.5206393222745541, 0.5261852393170334, 0.5352774045459634]
+ROC AUC Score on Test Set:
+0.7659318545630674
+Mortality @ K on Test Set:
+K = 10
+average rate:  0.10216110019646366
+0.9
+K = 50
+average rate:  0.10216110019646366
+0.54
+K = 100
+average rate:  0.10216110019646366
+0.48
+K = 500
+average rate:  0.10216110019646366
+0.364
+K = 1000
+average rate:  0.10216110019646366
+0.308
+Using All features - balanced 
+ -----------------------------------------------------------------------------------
+
+Best score: 0.751
+Best parameters set:
+	lr__C: 0.03125
+Mean test score:
+[0.7505442136760079, 0.7402711568836255, 0.7327260176721294, 0.7231798695435692, 0.7172709448561906, 0.7029958702296804, 0.6917202988872133, 0.6930831409601269, 0.6857168254490098, 0.6789873367210076, 0.6761671038243555]
+ROC AUC Score on Test Set:
+0.8380709631100379
+Mortality @ K on Test Set:
+K = 10
+average rate:  0.10216110019646366
+0.7
+K = 50
+average rate:  0.10216110019646366
+0.8
+K = 100
+average rate:  0.10216110019646366
+0.79
+K = 500
+average rate:  0.10216110019646366
+0.484
+K = 1000
+average rate:  0.10216110019646366
+0.388
+Using All But Note features - balanced 
+ -----------------------------------------------------------------------------------
+
+Best score: 0.751
+Best parameters set:
+	lr__C: 0.03125
+Mean test score:
+[0.7506356356177503, 0.7438174050700764, 0.7329984967493097, 0.7242702325393026, 0.7114494219274485, 0.705447735237292, 0.6948995192456588, 0.6868054016966959, 0.6802560767301081, 0.6789810831028429, 0.6829790807538648]
+ROC AUC Score on Test Set:
+0.8341793795451189
+Mortality @ K on Test Set:
+K = 10
+average rate:  0.10216110019646366
+0.6
+K = 50
+average rate:  0.10216110019646366
+0.86
+K = 100
+average rate:  0.10216110019646366
+0.76
+K = 500
+average rate:  0.10216110019646366
+0.474
+K = 1000
+average rate:  0.10216110019646366
+0.384
+Using Note features - balanced 
+ -----------------------------------------------------------------------------------
+
+Best score: 0.717
+Best parameters set:
+	lr__C: 16.0
+Mean test score:
+[0.6220509723482872, 0.6480623015220711, 0.6643477654928923, 0.6839069985729839, 0.6943718329890866, 0.6990155911634588, 0.7011133822664065, 0.7079387598062689, 0.7120339863301861, 0.7170394120884225, 0.7111331675231145]
+ROC AUC Score on Test Set:
+0.7658322355200284
+Mortality @ K on Test Set:
+K = 10
+average rate:  0.10216110019646366
+0.9
+K = 50
+average rate:  0.10216110019646366
+0.54
+K = 100
+average rate:  0.10216110019646366
+0.43
+K = 500
+average rate:  0.10216110019646366
+0.36
+K = 1000
+average rate:  0.10216110019646366
+0.302
+Saving all models 
+ --------------------------------------------------------------------------------------------------
+

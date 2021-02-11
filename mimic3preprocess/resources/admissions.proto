@@ -1,0 +1,25 @@
+syntax = "proto2";
+
+package admission_detail;
+
+message Admission {
+
+    required int32 subject_id = 1;
+    required int32 hadm_id = 2;
+    required int32 times_in_icu = 3;
+    required float age = 4;
+    required string date_of_birth = 5;
+    required string admittime = 6;
+    required string dischtime = 7;
+    required string admission_type = 8;
+    required string diagnosis = 9;
+    required string dbsource = 10;
+    required int32 hospital_expire_flag = 11;
+
+}
+
+message Subject {
+
+    repeated Admission admissions = 1;
+
+}

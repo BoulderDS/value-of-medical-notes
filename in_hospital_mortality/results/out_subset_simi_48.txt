@@ -1,0 +1,86 @@
+Namespace(data='/data/physician_notes/new_experiments/in_hospital_mortality_48/', load_model='/data/physician_notes/new_results/', period_length=48.0)
+Reading data and extracting features ...
+Finished reading testing data ...
+  test data shape = (6763, 32172)
+Using Notes that are copy pasted
+ -----------------------------------------------------------------------------------
+
+ROC AUC Score for All features on Test Set:
+0.8445520898261609
+ROC AUC Score for only Note features on Test Set:
+0.7659051445363925
+Mortality @ K for All features on Test Set:
+K = 10
+average rate:  0.09478042288925033
+0.9
+K = 50
+average rate:  0.09478042288925033
+0.84
+K = 100
+average rate:  0.09478042288925033
+0.74
+K = 500
+average rate:  0.09478042288925033
+0.468
+K = 1000
+average rate:  0.09478042288925033
+0.351
+Mortality @ K for only Note features on Test Set:
+K = 10
+average rate:  0.09478042288925033
+0.7
+K = 50
+average rate:  0.09478042288925033
+0.48
+K = 100
+average rate:  0.09478042288925033
+0.46
+K = 500
+average rate:  0.09478042288925033
+0.354
+K = 1000
+average rate:  0.09478042288925033
+0.26
+Using Notes that are NOT copy pasted
+ -----------------------------------------------------------------------------------
+
+ROC AUC Score for All features on Test Set:
+0.8479061475428633
+ROC AUC Score for only Note features on Test Set:
+0.7823878587289849
+Mortality @ K for All features on Test Set:
+K = 10
+average rate:  0.09478042288925033
+0.9
+K = 50
+average rate:  0.09478042288925033
+0.82
+K = 100
+average rate:  0.09478042288925033
+0.73
+K = 500
+average rate:  0.09478042288925033
+0.466
+K = 1000
+average rate:  0.09478042288925033
+0.349
+Mortality @ K for only Note features on Test Set:
+K = 10
+average rate:  0.09478042288925033
+0.6
+K = 50
+average rate:  0.09478042288925033
+0.52
+K = 100
+average rate:  0.09478042288925033
+0.46
+K = 500
+average rate:  0.09478042288925033
+0.354
+K = 1000
+average rate:  0.09478042288925033
+0.282
+
+
+ ------ DONE!!------------------------------------
+

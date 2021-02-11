@@ -1,0 +1,878 @@
+Namespace(data='/data/physician_notes/new_experiments/in_hospital_mortality_retro/', load_model='/data/physician_notes/new_results/', period_length=inf)
+Reading data and extracting features ...
+Finished reading testing data ...
+  test data shape = (7390, 32172)
+Using Nursing/Other notes 
+ -----------------------------------------------------------------------------------
+
+ROC AUC Score for All features on Test Set:
+0.9816291511961607
+ROC AUC Score for only Note features on Test Set:
+0.8443830516184134
+Mortality @ K for All features on Test Set:
+K = 10
+average rate:  0.11488497970230041
+1.0
+K = 50
+average rate:  0.11488497970230041
+0.98
+K = 100
+average rate:  0.11488497970230041
+0.99
+K = 500
+average rate:  0.11488497970230041
+0.972
+K = 1000
+average rate:  0.11488497970230041
+0.768
+Mortality @ K for only Note features on Test Set:
+K = 10
+average rate:  0.11488497970230041
+1.0
+K = 50
+average rate:  0.11488497970230041
+1.0
+K = 100
+average rate:  0.11488497970230041
+1.0
+K = 500
+average rate:  0.11488497970230041
+0.778
+K = 1000
+average rate:  0.11488497970230041
+0.465
+Using Physician notes 
+ -----------------------------------------------------------------------------------
+
+ROC AUC Score for All features on Test Set:
+0.9817609644988239
+ROC AUC Score for only Note features on Test Set:
+0.6116002188965174
+Mortality @ K for All features on Test Set:
+K = 10
+average rate:  0.11488497970230041
+1.0
+K = 50
+average rate:  0.11488497970230041
+0.98
+K = 100
+average rate:  0.11488497970230041
+0.99
+K = 500
+average rate:  0.11488497970230041
+0.98
+K = 1000
+average rate:  0.11488497970230041
+0.768
+Mortality @ K for only Note features on Test Set:
+K = 10
+average rate:  0.11488497970230041
+0.9
+K = 50
+average rate:  0.11488497970230041
+0.88
+K = 100
+average rate:  0.11488497970230041
+0.72
+K = 500
+average rate:  0.11488497970230041
+0.27
+K = 1000
+average rate:  0.11488497970230041
+0.202
+Using Nutrition notes 
+ -----------------------------------------------------------------------------------
+
+ROC AUC Score for All features on Test Set:
+0.9815691869478179
+ROC AUC Score for only Note features on Test Set:
+0.5084392926811743
+Mortality @ K for All features on Test Set:
+K = 10
+average rate:  0.11488497970230041
+1.0
+K = 50
+average rate:  0.11488497970230041
+0.98
+K = 100
+average rate:  0.11488497970230041
+0.99
+K = 500
+average rate:  0.11488497970230041
+0.98
+K = 1000
+average rate:  0.11488497970230041
+0.767
+Mortality @ K for only Note features on Test Set:
+K = 10
+average rate:  0.11488497970230041
+0.6
+K = 50
+average rate:  0.11488497970230041
+0.52
+K = 100
+average rate:  0.11488497970230041
+0.35
+K = 500
+average rate:  0.11488497970230041
+0.172
+K = 1000
+average rate:  0.11488497970230041
+0.125
+Using General notes 
+ -----------------------------------------------------------------------------------
+
+ROC AUC Score for All features on Test Set:
+0.9816900158085926
+ROC AUC Score for only Note features on Test Set:
+0.555253813537118
+Mortality @ K for All features on Test Set:
+K = 10
+average rate:  0.11488497970230041
+1.0
+K = 50
+average rate:  0.11488497970230041
+0.98
+K = 100
+average rate:  0.11488497970230041
+0.99
+K = 500
+average rate:  0.11488497970230041
+0.978
+K = 1000
+average rate:  0.11488497970230041
+0.767
+Mortality @ K for only Note features on Test Set:
+K = 10
+average rate:  0.11488497970230041
+0.9
+K = 50
+average rate:  0.11488497970230041
+0.92
+K = 100
+average rate:  0.11488497970230041
+0.64
+K = 500
+average rate:  0.11488497970230041
+0.226
+K = 1000
+average rate:  0.11488497970230041
+0.172
+Using Nursing notes 
+ -----------------------------------------------------------------------------------
+
+ROC AUC Score for All features on Test Set:
+0.9817933776060365
+ROC AUC Score for only Note features on Test Set:
+0.6278973491300412
+Mortality @ K for All features on Test Set:
+K = 10
+average rate:  0.11488497970230041
+1.0
+K = 50
+average rate:  0.11488497970230041
+0.98
+K = 100
+average rate:  0.11488497970230041
+0.99
+K = 500
+average rate:  0.11488497970230041
+0.98
+K = 1000
+average rate:  0.11488497970230041
+0.767
+Mortality @ K for only Note features on Test Set:
+K = 10
+average rate:  0.11488497970230041
+1.0
+K = 50
+average rate:  0.11488497970230041
+0.86
+K = 100
+average rate:  0.11488497970230041
+0.84
+K = 500
+average rate:  0.11488497970230041
+0.292
+K = 1000
+average rate:  0.11488497970230041
+0.212
+Using Respiratory notes 
+ -----------------------------------------------------------------------------------
+
+ROC AUC Score for All features on Test Set:
+0.9816062819482942
+ROC AUC Score for only Note features on Test Set:
+0.5387595035680528
+Mortality @ K for All features on Test Set:
+K = 10
+average rate:  0.11488497970230041
+1.0
+K = 50
+average rate:  0.11488497970230041
+0.98
+K = 100
+average rate:  0.11488497970230041
+0.99
+K = 500
+average rate:  0.11488497970230041
+0.98
+K = 1000
+average rate:  0.11488497970230041
+0.766
+Mortality @ K for only Note features on Test Set:
+K = 10
+average rate:  0.11488497970230041
+0.9
+K = 50
+average rate:  0.11488497970230041
+0.52
+K = 100
+average rate:  0.11488497970230041
+0.47
+K = 500
+average rate:  0.11488497970230041
+0.202
+K = 1000
+average rate:  0.11488497970230041
+0.149
+Using Rehab Services notes 
+ -----------------------------------------------------------------------------------
+
+ROC AUC Score for All features on Test Set:
+0.981623028720354
+ROC AUC Score for only Note features on Test Set:
+0.5092705088083519
+Mortality @ K for All features on Test Set:
+K = 10
+average rate:  0.11488497970230041
+1.0
+K = 50
+average rate:  0.11488497970230041
+0.98
+K = 100
+average rate:  0.11488497970230041
+0.99
+K = 500
+average rate:  0.11488497970230041
+0.976
+K = 1000
+average rate:  0.11488497970230041
+0.766
+Mortality @ K for only Note features on Test Set:
+K = 10
+average rate:  0.11488497970230041
+0.2
+K = 50
+average rate:  0.11488497970230041
+0.18
+K = 100
+average rate:  0.11488497970230041
+0.15
+K = 500
+average rate:  0.11488497970230041
+0.132
+K = 1000
+average rate:  0.11488497970230041
+0.098
+Using Social Work notes 
+ -----------------------------------------------------------------------------------
+
+ROC AUC Score for All features on Test Set:
+0.9816694875073583
+ROC AUC Score for only Note features on Test Set:
+0.5219871611682332
+Mortality @ K for All features on Test Set:
+K = 10
+average rate:  0.11488497970230041
+1.0
+K = 50
+average rate:  0.11488497970230041
+0.98
+K = 100
+average rate:  0.11488497970230041
+0.99
+K = 500
+average rate:  0.11488497970230041
+0.98
+K = 1000
+average rate:  0.11488497970230041
+0.766
+Mortality @ K for only Note features on Test Set:
+K = 10
+average rate:  0.11488497970230041
+0.8
+K = 50
+average rate:  0.11488497970230041
+0.48
+K = 100
+average rate:  0.11488497970230041
+0.38
+K = 500
+average rate:  0.11488497970230041
+0.178
+K = 1000
+average rate:  0.11488497970230041
+0.131
+Using Echo notes 
+ -----------------------------------------------------------------------------------
+
+ROC AUC Score for All features on Test Set:
+0.981591335904413
+ROC AUC Score for only Note features on Test Set:
+0.6007382265240417
+Mortality @ K for All features on Test Set:
+K = 10
+average rate:  0.11488497970230041
+1.0
+K = 50
+average rate:  0.11488497970230041
+0.98
+K = 100
+average rate:  0.11488497970230041
+0.99
+K = 500
+average rate:  0.11488497970230041
+0.976
+K = 1000
+average rate:  0.11488497970230041
+0.765
+Mortality @ K for only Note features on Test Set:
+K = 10
+average rate:  0.11488497970230041
+0.3
+K = 50
+average rate:  0.11488497970230041
+0.3
+K = 100
+average rate:  0.11488497970230041
+0.34
+K = 500
+average rate:  0.11488497970230041
+0.25
+K = 1000
+average rate:  0.11488497970230041
+0.202
+Using ECG notes 
+ -----------------------------------------------------------------------------------
+
+ROC AUC Score for All features on Test Set:
+0.981453490162352
+ROC AUC Score for only Note features on Test Set:
+0.577381791648907
+Mortality @ K for All features on Test Set:
+K = 10
+average rate:  0.11488497970230041
+1.0
+K = 50
+average rate:  0.11488497970230041
+0.98
+K = 100
+average rate:  0.11488497970230041
+0.99
+K = 500
+average rate:  0.11488497970230041
+0.976
+K = 1000
+average rate:  0.11488497970230041
+0.766
+Mortality @ K for only Note features on Test Set:
+K = 10
+average rate:  0.11488497970230041
+0.3
+K = 50
+average rate:  0.11488497970230041
+0.16
+K = 100
+average rate:  0.11488497970230041
+0.25
+K = 500
+average rate:  0.11488497970230041
+0.19
+K = 1000
+average rate:  0.11488497970230041
+0.155
+Using Case Management notes 
+ -----------------------------------------------------------------------------------
+
+ROC AUC Score for All features on Test Set:
+0.9816012399093945
+ROC AUC Score for only Note features on Test Set:
+0.5004156980999976
+Mortality @ K for All features on Test Set:
+K = 10
+average rate:  0.11488497970230041
+1.0
+K = 50
+average rate:  0.11488497970230041
+0.98
+K = 100
+average rate:  0.11488497970230041
+0.99
+K = 500
+average rate:  0.11488497970230041
+0.976
+K = 1000
+average rate:  0.11488497970230041
+0.766
+Mortality @ K for only Note features on Test Set:
+K = 10
+average rate:  0.11488497970230041
+0.2
+K = 50
+average rate:  0.11488497970230041
+0.14
+K = 100
+average rate:  0.11488497970230041
+0.11
+K = 500
+average rate:  0.11488497970230041
+0.11
+K = 1000
+average rate:  0.11488497970230041
+0.11
+Using Pharmacy notes 
+ -----------------------------------------------------------------------------------
+
+ROC AUC Score for All features on Test Set:
+0.9816471584779453
+ROC AUC Score for only Note features on Test Set:
+0.5005350863782296
+Mortality @ K for All features on Test Set:
+K = 10
+average rate:  0.11488497970230041
+1.0
+K = 50
+average rate:  0.11488497970230041
+0.98
+K = 100
+average rate:  0.11488497970230041
+0.99
+K = 500
+average rate:  0.11488497970230041
+0.976
+K = 1000
+average rate:  0.11488497970230041
+0.766
+Mortality @ K for only Note features on Test Set:
+K = 10
+average rate:  0.11488497970230041
+0.1
+K = 50
+average rate:  0.11488497970230041
+0.12
+K = 100
+average rate:  0.11488497970230041
+0.1
+K = 500
+average rate:  0.11488497970230041
+0.104
+K = 1000
+average rate:  0.11488497970230041
+0.117
+Using Consult notes 
+ -----------------------------------------------------------------------------------
+
+ROC AUC Score for All features on Test Set:
+0.9816359939632389
+ROC AUC Score for only Note features on Test Set:
+0.5021476384620414
+Mortality @ K for All features on Test Set:
+K = 10
+average rate:  0.11488497970230041
+1.0
+K = 50
+average rate:  0.11488497970230041
+0.98
+K = 100
+average rate:  0.11488497970230041
+0.99
+K = 500
+average rate:  0.11488497970230041
+0.976
+K = 1000
+average rate:  0.11488497970230041
+0.766
+Mortality @ K for only Note features on Test Set:
+K = 10
+average rate:  0.11488497970230041
+0.4
+K = 50
+average rate:  0.11488497970230041
+0.14
+K = 100
+average rate:  0.11488497970230041
+0.16
+K = 500
+average rate:  0.11488497970230041
+0.096
+K = 1000
+average rate:  0.11488497970230041
+0.111
+Using Radiology notes 
+ -----------------------------------------------------------------------------------
+
+ROC AUC Score for All features on Test Set:
+0.9814276497129911
+ROC AUC Score for only Note features on Test Set:
+0.7691086521567592
+Mortality @ K for All features on Test Set:
+K = 10
+average rate:  0.11488497970230041
+1.0
+K = 50
+average rate:  0.11488497970230041
+0.98
+K = 100
+average rate:  0.11488497970230041
+0.99
+K = 500
+average rate:  0.11488497970230041
+0.98
+K = 1000
+average rate:  0.11488497970230041
+0.768
+Mortality @ K for only Note features on Test Set:
+K = 10
+average rate:  0.11488497970230041
+0.6
+K = 50
+average rate:  0.11488497970230041
+0.6
+K = 100
+average rate:  0.11488497970230041
+0.6
+K = 500
+average rate:  0.11488497970230041
+0.434
+K = 1000
+average rate:  0.11488497970230041
+0.277
+
+
+ -------------------------------------------------------------------------------------------------------
+
+Using English notes 
+ -----------------------------------------------------------------------------------
+
+ROC AUC Score for All features on Test Set:
+0.9820166679001655
+ROC AUC Score for only Note features on Test Set:
+0.9001825758300142
+Mortality @ K for All features on Test Set:
+K = 10
+average rate:  0.11488497970230041
+1.0
+K = 50
+average rate:  0.11488497970230041
+0.98
+K = 100
+average rate:  0.11488497970230041
+0.99
+K = 500
+average rate:  0.11488497970230041
+0.98
+K = 1000
+average rate:  0.11488497970230041
+0.768
+Mortality @ K for only Note features on Test Set:
+K = 10
+average rate:  0.11488497970230041
+1.0
+K = 50
+average rate:  0.11488497970230041
+0.82
+K = 100
+average rate:  0.11488497970230041
+0.76
+K = 500
+average rate:  0.11488497970230041
+0.678
+K = 1000
+average rate:  0.11488497970230041
+0.525
+Using Non-English (Medical) notes 
+ -----------------------------------------------------------------------------------
+
+ROC AUC Score for All features on Test Set:
+0.9817908565865865
+ROC AUC Score for only Note features on Test Set:
+0.8580156443662688
+Mortality @ K for All features on Test Set:
+K = 10
+average rate:  0.11488497970230041
+1.0
+K = 50
+average rate:  0.11488497970230041
+0.98
+K = 100
+average rate:  0.11488497970230041
+0.99
+K = 500
+average rate:  0.11488497970230041
+0.98
+K = 1000
+average rate:  0.11488497970230041
+0.768
+Mortality @ K for only Note features on Test Set:
+K = 10
+average rate:  0.11488497970230041
+1.0
+K = 50
+average rate:  0.11488497970230041
+0.9
+K = 100
+average rate:  0.11488497970230041
+0.78
+K = 500
+average rate:  0.11488497970230041
+0.45
+K = 1000
+average rate:  0.11488497970230041
+0.396
+
+
+ ----------------------------------------------------------------------------------------------------------------
+
+Using Noun notes 
+ -----------------------------------------------------------------------------------
+
+ROC AUC Score for All features on Test Set:
+0.9817004600320278
+ROC AUC Score for only Note features on Test Set:
+0.868624274284035
+Mortality @ K for All features on Test Set:
+K = 10
+average rate:  0.11488497970230041
+1.0
+K = 50
+average rate:  0.11488497970230041
+0.98
+K = 100
+average rate:  0.11488497970230041
+0.99
+K = 500
+average rate:  0.11488497970230041
+0.98
+K = 1000
+average rate:  0.11488497970230041
+0.768
+Mortality @ K for only Note features on Test Set:
+K = 10
+average rate:  0.11488497970230041
+1.0
+K = 50
+average rate:  0.11488497970230041
+0.94
+K = 100
+average rate:  0.11488497970230041
+0.84
+K = 500
+average rate:  0.11488497970230041
+0.452
+K = 1000
+average rate:  0.11488497970230041
+0.416
+Using Proper Noun notes 
+ -----------------------------------------------------------------------------------
+
+ROC AUC Score for All features on Test Set:
+0.9819124057386326
+ROC AUC Score for only Note features on Test Set:
+0.8612187796501148
+Mortality @ K for All features on Test Set:
+K = 10
+average rate:  0.11488497970230041
+1.0
+K = 50
+average rate:  0.11488497970230041
+0.98
+K = 100
+average rate:  0.11488497970230041
+0.99
+K = 500
+average rate:  0.11488497970230041
+0.98
+K = 1000
+average rate:  0.11488497970230041
+0.767
+Mortality @ K for only Note features on Test Set:
+K = 10
+average rate:  0.11488497970230041
+0.8
+K = 50
+average rate:  0.11488497970230041
+0.76
+K = 100
+average rate:  0.11488497970230041
+0.68
+K = 500
+average rate:  0.11488497970230041
+0.546
+K = 1000
+average rate:  0.11488497970230041
+0.431
+Using Adjective notes 
+ -----------------------------------------------------------------------------------
+
+ROC AUC Score for All features on Test Set:
+0.9817841938923263
+ROC AUC Score for only Note features on Test Set:
+0.780459452193278
+Mortality @ K for All features on Test Set:
+K = 10
+average rate:  0.11488497970230041
+1.0
+K = 50
+average rate:  0.11488497970230041
+0.98
+K = 100
+average rate:  0.11488497970230041
+0.99
+K = 500
+average rate:  0.11488497970230041
+0.978
+K = 1000
+average rate:  0.11488497970230041
+0.767
+Mortality @ K for only Note features on Test Set:
+K = 10
+average rate:  0.11488497970230041
+0.7
+K = 50
+average rate:  0.11488497970230041
+0.48
+K = 100
+average rate:  0.11488497970230041
+0.47
+K = 500
+average rate:  0.11488497970230041
+0.386
+K = 1000
+average rate:  0.11488497970230041
+0.315
+Using Verb notes 
+ -----------------------------------------------------------------------------------
+
+ROC AUC Score for All features on Test Set:
+0.9817274709547046
+ROC AUC Score for only Note features on Test Set:
+0.8224015627439424
+Mortality @ K for All features on Test Set:
+K = 10
+average rate:  0.11488497970230041
+1.0
+K = 50
+average rate:  0.11488497970230041
+0.98
+K = 100
+average rate:  0.11488497970230041
+0.99
+K = 500
+average rate:  0.11488497970230041
+0.978
+K = 1000
+average rate:  0.11488497970230041
+0.767
+Mortality @ K for only Note features on Test Set:
+K = 10
+average rate:  0.11488497970230041
+0.9
+K = 50
+average rate:  0.11488497970230041
+0.82
+K = 100
+average rate:  0.11488497970230041
+0.79
+K = 500
+average rate:  0.11488497970230041
+0.556
+K = 1000
+average rate:  0.11488497970230041
+0.431
+
+
+ --------------------------------------------------------------------------------------------------------
+
+Using Notes that are copy pasted
+ -----------------------------------------------------------------------------------
+
+ROC AUC Score for All features on Test Set:
+0.9816410360021384
+ROC AUC Score for only Note features on Test Set:
+0.5
+Mortality @ K for All features on Test Set:
+K = 10
+average rate:  0.11488497970230041
+1.0
+K = 50
+average rate:  0.11488497970230041
+0.98
+K = 100
+average rate:  0.11488497970230041
+0.99
+K = 500
+average rate:  0.11488497970230041
+0.976
+K = 1000
+average rate:  0.11488497970230041
+0.766
+Mortality @ K for only Note features on Test Set:
+K = 10
+average rate:  0.11488497970230041
+0.0
+K = 50
+average rate:  0.11488497970230041
+0.18
+K = 100
+average rate:  0.11488497970230041
+0.09
+K = 500
+average rate:  0.11488497970230041
+0.11
+K = 1000
+average rate:  0.11488497970230041
+0.105
+Using Notes that are NOT copy pasted
+ -----------------------------------------------------------------------------------
+
+ROC AUC Score for All features on Test Set:
+0.9816410360021384
+ROC AUC Score for only Note features on Test Set:
+0.5
+Mortality @ K for All features on Test Set:
+K = 10
+average rate:  0.11488497970230041
+1.0
+K = 50
+average rate:  0.11488497970230041
+0.98
+K = 100
+average rate:  0.11488497970230041
+0.99
+K = 500
+average rate:  0.11488497970230041
+0.976
+K = 1000
+average rate:  0.11488497970230041
+0.766
+Mortality @ K for only Note features on Test Set:
+K = 10
+average rate:  0.11488497970230041
+0.2
+K = 50
+average rate:  0.11488497970230041
+0.08
+K = 100
+average rate:  0.11488497970230041
+0.13
+K = 500
+average rate:  0.11488497970230041
+0.118
+K = 1000
+average rate:  0.11488497970230041
+0.127
+
+
+ ------ DONE!!------------------------------------
+

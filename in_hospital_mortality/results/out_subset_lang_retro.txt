@@ -1,0 +1,86 @@
+Namespace(data='/data/physician_notes/new_experiments/in_hospital_mortality_retro/', load_model='/data/physician_notes/new_results/', period_length=inf)
+Reading data and extracting features ...
+Finished reading testing data ...
+  test data shape = (7390, 32172)
+Using the Notes with only extracted English Words
+ -----------------------------------------------------------------------------------
+
+ROC AUC Score for All features on Test Set:
+0.9820166679001655
+ROC AUC Score for only Note features on Test Set:
+0.9001825758300142
+Mortality @ K for All features on Test Set:
+K = 10
+average rate:  0.11488497970230041
+1.0
+K = 50
+average rate:  0.11488497970230041
+0.98
+K = 100
+average rate:  0.11488497970230041
+0.99
+K = 500
+average rate:  0.11488497970230041
+0.98
+K = 1000
+average rate:  0.11488497970230041
+0.768
+Mortality @ K for only Note features on Test Set:
+K = 10
+average rate:  0.11488497970230041
+1.0
+K = 50
+average rate:  0.11488497970230041
+0.82
+K = 100
+average rate:  0.11488497970230041
+0.76
+K = 500
+average rate:  0.11488497970230041
+0.678
+K = 1000
+average rate:  0.11488497970230041
+0.525
+Using the Notes with only extracted Medical Words
+ -----------------------------------------------------------------------------------
+
+ROC AUC Score for All features on Test Set:
+0.9819658873655328
+ROC AUC Score for only Note features on Test Set:
+0.8978367672319333
+Mortality @ K for All features on Test Set:
+K = 10
+average rate:  0.11488497970230041
+1.0
+K = 50
+average rate:  0.11488497970230041
+0.98
+K = 100
+average rate:  0.11488497970230041
+0.99
+K = 500
+average rate:  0.11488497970230041
+0.976
+K = 1000
+average rate:  0.11488497970230041
+0.768
+Mortality @ K for only Note features on Test Set:
+K = 10
+average rate:  0.11488497970230041
+1.0
+K = 50
+average rate:  0.11488497970230041
+1.0
+K = 100
+average rate:  0.11488497970230041
+0.93
+K = 500
+average rate:  0.11488497970230041
+0.756
+K = 1000
+average rate:  0.11488497970230041
+0.558
+
+
+ ------ DONE!!------------------------------------
+

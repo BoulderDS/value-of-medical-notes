@@ -1,0 +1,21 @@
+syntax = "proto2";
+
+package ALLEVENTS;
+
+message Event {
+
+    required int32 subject_id = 1;
+    required int32 hadm_id = 2;
+    required string charttime = 3;
+    optional float cgid = 4;
+    required int32 itemid = 5;
+    optional string value = 6;
+    optional string valueuom = 7;
+
+}
+
+message Episode {
+
+    repeated Event events = 1;
+
+}
