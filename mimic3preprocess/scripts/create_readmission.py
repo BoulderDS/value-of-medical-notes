@@ -4,7 +4,7 @@ import os
 import argparse
 import pandas as pd
 import numpy as np
-
+import re
 import random
 random.seed(12796)
 from mimic3preprocess.subjects import read_admissions
@@ -18,9 +18,11 @@ def process_partition(args, partition):
         os.mkdir(output_dir)
     xy_pairs = []
     patients = list(filter(str.isdigit, os.listdir(os.path.join(args.root_path, partition))))
+
     for (patient_index, patient) in enumerate(patients):
         patient_folder = os.path.join(args.root_path, partition, patient)
         patient_ts_files = list(filter(lambda x: x.find("timeseries") != -1, os.listdir(patient_folder)))
+        patient_ts_files = sorted(patient_ts_files, key=lambda f: int(re.sub('\D', '', f)))
         if len(patient_ts_files) <= 1:
             readmission = 0
             try:
@@ -74,5 +76,5 @@ if __name__ == '__main__':
     if not os.path.exists(args.output_path):
         os.makedirs(args.output_path)
 
-    process_partition(args, "train")
+    # process_partition(args, "train")
     process_partition(args, "test")
