@@ -70,6 +70,8 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--data', type=str, help='Path to the data of in-hospital mortality task',
                         default='/data/joe/physician_notes/mimic-data/preprocessed/')
+    parser.add_argument('--model_dir', type=str, help='Path to the data of in-hospital mortality task',
+                        default='./models/logistic_regression/')
     parser.add_argument('--feature_period', type=str, help='feature period',
                         choices=["24", "48", "retro"])
     parser.add_argument('--feature_used', type=str, help='feature used',
@@ -92,19 +94,19 @@ if __name__ == '__main__':
         model_name = "feature_" + model_name
     else:
         model_name = "text_" + model_name
-    path = f'/data/joe/physician_notes/logistic_regression/models/{args.task}/{model_name}'
+    path = f'{args.data}/logistic_regression/models/{args.task}/{model_name}'
     model = pickle.load(open(path, 'rb'))
 
     datapath = os.path.join(args.data, f"timeseries_features_{args.feature_period}")
-    featurepath = f'/data/joe/physician_notes/mimic-data/preprocessed/features_{args.feature_period}.pkl'
+    featurepath = f'{args.data}/features_{args.feature_period}.pkl'
 
     #print("Loading data")
     # features = pickle.load(open(featurepath,'rb'))
     note_ids = Config.note_type[args.note]
     note2id = {'Nursing/other': 900001, 'Physician': 900002, 'Nutrition': 900003, 'General': 900004, 'Nursing': 900005, 'Respiratory ': 900006,'Rehab Services': 900007, 'Social Work': 900008, 'Echo': 900010,'ECG': 900011,'Case Management ': 900012,'Pharmacy': 900013,'Consult': 900014, 'Radiology': 900015, 'Discharge summary': 900016}
 
-    test_file = pd.read_csv(f"/data/joe/physician_notes/mimic-data/{args.task}/{args.note}_note_test_{args.feature_period}.csv")
-    patient2notes = pd.read_csv(f"/data/joe/physician_notes/mimic-data/preprocessed/patient2notes_{args.feature_period}.csv")
+    test_file = pd.read_csv(f"{args.data}/{args.task}/{args.note}_note_test_{args.feature_period}.csv")
+    patient2notes = pd.read_csv(f"{args.data}/patient2notes_{args.feature_period}.csv")
     patient2notes['900001'] = patient2notes['900001'] + patient2notes['900005'] - (patient2notes['900001'] * patient2notes['900005'])
 
     if args.task == "readmission":
@@ -163,8 +165,8 @@ if __name__ == '__main__':
     
     df = pd.DataFrame(results)
     print(df)
-    if not os.path.exists('/home/joe/physician_notes/models/logistic_regression/compare_notes_pairwise/'):
-        os.mkdir('/home/joe/physician_notes/models/logistic_regression/compare_notes_pairwise/')
+    if not os.path.exists(f'{args.model_dir}/compare_notes_pairwise/'):
+        os.mkdir(f'{args.model_dir}/compare_notes_pairwise/')
     model_name = args.task+'_'+args.note +'_'+ args.feature_period + '.csv'
     if args.feature_used == "all":
         model_name = "feature_text_" + model_name
@@ -177,5 +179,5 @@ if __name__ == '__main__':
     if args.segment:
         model_name = args.segment+ "_" + model_name
 
-    df.to_csv(f'/home/joe/physician_notes/models/logistic_regression/compare_notes_pairwise/{model_name}', index=False)
+    df.to_csv(f'{args.model_dir}/compare_notes_pairwise/{model_name}', index=False)
 

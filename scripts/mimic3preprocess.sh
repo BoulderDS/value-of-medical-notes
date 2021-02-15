@@ -36,6 +36,10 @@ python -m mimic3preprocess.scripts.timeseries_feature_extraction_multiprocessing
 echo "Create timeseries features in all admission"
 python -m mimic3preprocess.scripts.timeseries_feature_extraction_multiprocessing --num_worker $NUM_WORKER --period_length -1 --output_dir $OUTPUT_DIR/timeseries_features_retro/
 
+######################
+# Start process mortality
+######################
+
 echo "Create In-Hospital Mortality for 24 hours"
 (python -m mimic3preprocess.scripts.create_in_hospital_mortality $OUTPUT_DIR $OUTPUT_DIR/mortality/ 24)
 #echo "Create In-Hospital Mortality for 48 hours"
@@ -66,29 +70,9 @@ do
     done
 done
 
-#echo "Compute X_mean features in 24 hours for GRU-D"
-#python -m mimic3preprocess.scripts.calculate_mean_x /data/joe/physician_notes/mimic-data/mortality/ /data/joe/physician_notes/mimic-data/preprocessed/grud_features_24/ physician 24
-#echo "Compute X_mean features in 48 hours for GRU-D"
-#python -m mimic3preprocess.scripts.calculate_mean_x /data/joe/physician_notes/mimic-data/mortality/ /data/joe/physician_notes/mimic-data/preprocessed/grud_features_48/ physician 48
-#echo "Compute X_mean features in retro hours for GRU-D"
-#python -m mimic3preprocess.scripts.calculate_mean_x /data/joe/physician_notes/mimic-data/mortality/ /data/joe/physician_notes/mimic-data/preprocessed/grud_features_retro/ physician retro
-
-#echo "Compute X_mean features in 24 hours for GRU-D"
-#python -m mimic3preprocess.scripts.calculate_all_mean_x /data/joe/physician_notes/mimic-data/mortality/ /data/joe/physician_notes/mimic-data/preprocessed/features_24.pkl physician 24
-#echo "Compute X_mean features in 48 hours for GRU-D"
-#python -m mimic3preprocess.scripts.calculate_all_mean_x /data/joe/physician_notes/mimic-data/mortality/ /data/joe/physician_notes/mimic-data/preprocessed/features_48.pkl physician 48
-#echo "Compute X_mean features in retro hours for GRU-D"
-#python -m mimic3preprocess.scripts.calculate_all_mean_x /data/joe/physician_notes/mimic-data/mortality/ /data/joe/physician_notes/mimic-data/preprocessed/features_retro.pkl physician retro
-
-#echo "Create Only Physician Notes"
-#python -m mimic3preprocess.scripts.create_in_hospital_mortality_physician_note /data/joe/physician_notes/mimic-data/preprocessed/ /data/joe/physician_notes/mimic-data/in_hospital_retro_physician_note/ -1
-#echo "Create Only Physician Notes"
-#python -m mimic3preprocess.scripts.create_in_hospital_mortality_physician_note /data/joe/physician_notes/mimic-data/preprocessed/ /data/joe/physician_notes/mimic-data/in_hospital_24_physician_note/ 24
-#echo "Create Only Physician Notes"
-#python -m mimic3preprocess.scripts.create_in_hospital_mortality_physician_note /data/joe/physician_notes/mimic-data/preprocessed/ /data/joe/physician_notes/mimic-data/in_hospital_48_physician_note/ 48
-
-
-
+######################
+# Start process readmission
+######################
 echo "Create Readmission task"
 python -m mimic3preprocess.scripts.create_readmission $OUTPUT_DIR $OUTPUT_DIR/readmission/
 
@@ -113,3 +97,29 @@ done
 
 # echo "Create Only Discharge Notes"
 # python -m mimic3preprocess.scripts.create_in_hospital_mortality_discharge_note /data/joe/physician_notes/mimic-data/preprocessed/ /data/joe/physician_notes/mimic-data/in_hospital_retro_discharge_note/ -1
+
+
+########
+# GRU-D
+########
+#echo "Compute X_mean features in 24 hours for GRU-D"
+#python -m mimic3preprocess.scripts.calculate_mean_x /data/joe/physician_notes/mimic-data/mortality/ /data/joe/physician_notes/mimic-data/preprocessed/grud_features_24/ physician 24
+#echo "Compute X_mean features in 48 hours for GRU-D"
+#python -m mimic3preprocess.scripts.calculate_mean_x /data/joe/physician_notes/mimic-data/mortality/ /data/joe/physician_notes/mimic-data/preprocessed/grud_features_48/ physician 48
+#echo "Compute X_mean features in retro hours for GRU-D"
+#python -m mimic3preprocess.scripts.calculate_mean_x /data/joe/physician_notes/mimic-data/mortality/ /data/joe/physician_notes/mimic-data/preprocessed/grud_features_retro/ physician retro
+
+#echo "Compute X_mean features in 24 hours for GRU-D"
+#python -m mimic3preprocess.scripts.calculate_all_mean_x /data/joe/physician_notes/mimic-data/mortality/ /data/joe/physician_notes/mimic-data/preprocessed/features_24.pkl physician 24
+#echo "Compute X_mean features in 48 hours for GRU-D"
+#python -m mimic3preprocess.scripts.calculate_all_mean_x /data/joe/physician_notes/mimic-data/mortality/ /data/joe/physician_notes/mimic-data/preprocessed/features_48.pkl physician 48
+#echo "Compute X_mean features in retro hours for GRU-D"
+#python -m mimic3preprocess.scripts.calculate_all_mean_x /data/joe/physician_notes/mimic-data/mortality/ /data/joe/physician_notes/mimic-data/preprocessed/features_retro.pkl physician retro
+
+#echo "Create Only Physician Notes"
+#python -m mimic3preprocess.scripts.create_in_hospital_mortality_physician_note /data/joe/physician_notes/mimic-data/preprocessed/ /data/joe/physician_notes/mimic-data/in_hospital_retro_physician_note/ -1
+#echo "Create Only Physician Notes"
+#python -m mimic3preprocess.scripts.create_in_hospital_mortality_physician_note /data/joe/physician_notes/mimic-data/preprocessed/ /data/joe/physician_notes/mimic-data/in_hospital_24_physician_note/ 24
+#echo "Create Only Physician Notes"
+#python -m mimic3preprocess.scripts.create_in_hospital_mortality_physician_note /data/joe/physician_notes/mimic-data/preprocessed/ /data/joe/physician_notes/mimic-data/in_hospital_48_physician_note/ 48
+
