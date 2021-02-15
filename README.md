@@ -1,4 +1,6 @@
-# physician_notes
+# Characterizing the Value of Information in Medical Notes
+
+This repository is the implementation of [Characterizing the Value of Information in Medical Notes](https://www.aclweb.org/anthology/2020.findings-emnlp.187/) at Findings of EMNLP2020.
 
 ## 1. Environment
 
@@ -14,7 +16,7 @@ export NUM_WORKER=32 # number of threads for multithreading
 export DATA_DIR=/data/joe/physician_notes/mimic-data/ #path to your mimic csv files 
 export OUTPUT_DIR=/data/joe/physician_notes/mimic-data/preprocessed/
 ```
-Then, you may run `bash scripts.mimic3preprocess.sh`. This can take several hours (depends on number of workers) and up to ~500GB storage. Try to cut off unnecessary operations, e.g., 48 hours data, in `scripts.mimic3preprocess.sh` to save storage and computation time.
+Then, you may run `bash scripts.mimic3preprocess.sh`. This can take several hours (depends on number of workers) and up to ~600GB storage. Try to cut off unnecessary operations, e.g., 48 hours data, in `scripts.mimic3preprocess.sh` to save storage and computation time.
 
 We briefly introduce the functionality of every script as follows:
 1. `mimic3preprocess.scripts.extract_subjects`: group records by patient id.
@@ -40,5 +42,81 @@ OUTPUT_DIR/mortality/all_but_discharge_note_{train/valid/test}_24.csv
 OUTPUT_DIR/readmission/all_note_{train/valid/test}_retro.csv
 ```
 
+## 3. Train models with all information (structured/notes/structured+notes)
+Note that we use all notes but discharge summaries for mortality prediction and all notes for readmission prediction.
+
+### Logistic regression
+We first train logistic regression on two tasks. 
+```
+# 24hr Mortality prediction
+bash scripts/logisitc_regression_mortality.sh
+
+# readmission prediction
+bash scripts/logisitc_regression_readmission.sh
+```
+
+### Deep Averaging Networks (DAN)
+First, `cd models/DeepAverageNetwork` to working directory.
+1. Build vocabulary 
+Change ENV in `scripts/build_vocab.sh`.
+```
+# remember to run this command in DeepAverageNetwork dir
+bash scripts/build_vocab.sh
+```
+2. Train models
+```
+bash scripts/run_text.sh 
+bash scripts/run_feature.sh 
+bash scripts/run_text_feature.sh 
+```
+
+## 4. Note Type Comparison
+We need to build patient2notes table first. 
+```
+# at base dir. (~10 mins)
+python -m preprocessing.find_patient_with_sameNotes -data_dir /data/test_mimic_output/ -period 24
+python -m preprocessing.find_patient_with_sameNotes -data_dir /data/test_mimic_output/ -period retro
+```
+### Logistic Regression 
+Change `DATA_DIR` in `scripts/logistic_regression_compare_notes_pairwise.sh` and run
+```
+bash scripts/logistic_regression_compare_notes_pairwise.sh
+```
+In this step, we will conduct pairwise comparison between every two types of note on admissions with these two types of note. To make a fair comparison, we downsampling note type having longer tokens to have the same number of tokens as its countpart. Also, we compute mean score over 10 experiment with different random seeds.
+
+Once finishing the script, you can use notebook `notebooks/note_comparison_heatmap.ipynb` to visualize the note comparison with heatmap.
+
+### Deep Averaging Networks
+TODO
+
+## 5. Note Portion Comparison
+Change `DATA_DIR` in `scripts/sentence_select_similarity.sh` and `scripts/sentence_select.sh`. Then run
+```
+bash scripts/sentence_select.sh
+bash scripts/sentence_select_similarity.sh
+```
+After finishing it, you can make plot in `notebooks/heurisitics_group_notes_plot-new.ipynb`.
+
+### Logistic Regression
+Change `model` in `scripts/sentence_select_similarity.sh` and `scripts/sentence_select.sh` to `LR`.
+
+### Deep Averaging Networks
+Change `model` in `scripts/sentence_select_similarity.sh` and `scripts/sentence_select.sh` to `DAN`.
+
+## 6. Note Portion Comparison Based on Length
+TODO
+
 ## Troubleshooting
 1. `pandas` version might affect `python -m  mimic3preprocess.scripts.extract_subjects $DATA_DIR $OUTPUT_DIR`. Follow the env version if you have the same problem.
+
+## Contact
+Chao-Chun Hsu, chaochunh@uchicago.edu
+```
+@inproceedings{hsu2020characterizing,
+  title={Characterizing the Value of Information in Medical Notes},
+  author={Hsu, Chao-Chun and Karnwal, Shantanu and Mullainathan, Sendhil and Obermeyer, Ziad and Tan, Chenhao},
+  booktitle={Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing: Findings},
+  pages={2062--2072},
+  year={2020}
+}
+```
