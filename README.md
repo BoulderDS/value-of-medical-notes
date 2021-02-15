@@ -87,7 +87,7 @@ In this step, we will conduct pairwise comparison between every two types of not
 Once finishing the script, you can use notebook `notebooks/note_comparison_heatmap.ipynb` to visualize the note comparison with heatmap.
 
 ### Deep Averaging Networks
-TODO
+TODO: cleaning code
 
 ## 5. Note Portion Comparison
 Change `DATA_DIR` in `scripts/sentence_select_similarity.sh` and `scripts/sentence_select.sh`. Then run
@@ -104,7 +104,7 @@ Change `model` in `scripts/sentence_select_similarity.sh` and `scripts/sentence_
 Change `model` in `scripts/sentence_select_similarity.sh` and `scripts/sentence_select.sh` to `DAN`.
 
 ## 6. Note Portion Comparison Based on Length
-TODO
+TODO: cleaning code
 
 ## Troubleshooting
 1. `pandas` version might affect `python -m  mimic3preprocess.scripts.extract_subjects $DATA_DIR $OUTPUT_DIR`. Follow the env version if you have the same problem.
