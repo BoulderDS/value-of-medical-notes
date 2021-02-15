@@ -76,5 +76,5 @@ if __name__ == '__main__':
     if not os.path.exists(args.output_path):
         os.makedirs(args.output_path)
 
-    # process_partition(args, "train")
+    process_partition(args, "train")
     process_partition(args, "test")

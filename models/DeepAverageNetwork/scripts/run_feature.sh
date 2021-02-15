@@ -1,15 +1,17 @@
 #!/bin/bash
 set -x
 
-for i in 24 48 retro
+export DATA_DIR=/data/test_mimic_output/
+
+# for i in 24 # 48 retro
+# do
+#     for n in  all_but_discharge # physician physician_nursing
+#         do
+#             (python -m main -device 0 -name  $n -period $i -data_dir $DATA_DIR -feature -task mortality)& 
+#         done
+# done
+
+for i in all # discharge
 do
-for n in physician physician_nursing all_but_discharge
-do
-   (python -m main -device 1 -name $n -period $i -feature -task mortality -learning_rate 0.0001 -epoch 10) 
-done
-done
-#for i in physician discharge
-for i in all discharge
-do
-    (python -m main -device 1 -name $i -period retro -feature -task readmission -learning_rate 0.0001 -epoch 10)
+    (python -m main -device 0 -name $i -period retro -data_dir $DATA_DIR -feature -task readmission)&
 done
