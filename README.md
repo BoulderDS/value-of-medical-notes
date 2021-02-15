@@ -5,6 +5,9 @@ This repository is the implementation of [Characterizing the Value of Informatio
 ## 1. Environment
 
 ```
+# open a new conda with python3.7
+conda create -n notes python=3.7
+pip install -r requirements.txt
 python -m spacy download en_core_web_sm
 ```
 
