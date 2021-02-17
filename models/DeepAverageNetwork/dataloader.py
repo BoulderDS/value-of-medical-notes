@@ -13,18 +13,24 @@ sys.path.insert(0, '/home/joe/physician_notes/')
 import utils
 import re
 
+
 def clean_str(x):
-    y=re.sub('\\[(.*?)\\]','',x) #remove de-identified brackets
-    y=re.sub('[0-9]+\.','',y) #remove 1.2. since the segmenter segments based on this
-    y=re.sub('dr\.','doctor',y)
-    y=re.sub('m\.d\.','md',y)
-    y=re.sub('admission date:','',y)
-    y=re.sub('discharge date:','',y)
-    y=re.sub('--|__|==','',y)
+    y = re.sub('\\[(.*?)\\]', '', x)  # remove de-identified brackets
+    y = re.sub('[0-9]+\.', '', y)  # remove 1.2. since the segmenter segments based on this
+    y = re.sub('dr\.', 'doctor', y)
+    y = re.sub('m\.d\.', 'md', y)
+    y = re.sub('admission date:', '', y)
+    y = re.sub('discharge date:', '', y)
+    y = re.sub('--|__|==', '', y)
     return y
 
+
 class MIMICIIIDataset(Dataset):
-    def __init__(self, vocab, listfiles, name, feature=None, period="24", data_dir="", compare_note=None, text_length=None, segment=None):
+    def __init__(
+        self, vocab, listfiles, name, feature=None, 
+        period="24", data_dir="", compare_note=None,
+        text_length=None, segment=None
+    ):
         self.listfiles = listfiles
         self.vocab = vocab
         self.max_len = 40000
@@ -52,16 +58,16 @@ class MIMICIIIDataset(Dataset):
                     notes.extend([str(n) for n in df[note_tmp_id].dropna()])
             # sentence select heuristics
             if self.segment:
-                notes, _ = utils.segmentSentence(self, self.segment, notes, ["0"]*len(notes),self.datapath, stay, compare=True)
+                notes, _ = utils.segmentSentence(self, self.segment, notes, ["0"]*len(notes), self.datapath, stay, compare=True)
 
             notes = " ".join(notes).lower()
             notes = clean_str(notes)
             tokens = []
             tokenized_note = word_tokenize(notes)
             if self.text_length:
-                tokens.extend([self.vocab(token) for i, token in enumerate(reversed(tokenized_note)) if i<self.text_length])
+                tokens.extend([self.vocab(token) for i, token in enumerate(reversed(tokenized_note)) if i < self.text_length])
             else:
-                tokens.extend([self.vocab(token) for i, token in enumerate(reversed(tokenized_note)) if i<self.max_len])
+                tokens.extend([self.vocab(token) for i, token in enumerate(reversed(tokenized_note)) if i < self.max_len])
             self.stay2tokens[stay] = tokens
         else:
             tokens = self.stay2tokens[stay]
@@ -73,7 +79,7 @@ class MIMICIIIDataset(Dataset):
             return tokens, mortality
 
     def collate_fn(self, data):
-        #List of sentences and frames [B,]
+        # List of sentences and frames [B,]
         if self.features is not None:
             notes, mortality, features = zip(*data)
         else:
@@ -92,6 +98,7 @@ class MIMICIIIDataset(Dataset):
 
     def __len__(self):
         return len(self.listfiles)
+
 
 def impute_scale_features(train, val, test, period, data_dir):
     print("Loading features")
@@ -136,8 +143,14 @@ def impute_scale_features(train, val, test, period, data_dir):
            {key: value for (key, value) in zip(val_stays, val_fs)},\
            {key: value for (key, value) in zip(test_stays, test_fs)}, len(train_fs[0])
 
-def get_loader(df, vocab, feature, name, batch_size, shuffle, num_workers, period, data_dir, compare_note, text_length,segment):
-    Mimic = MIMICIIIDataset(vocab, df, name, feature, period, data_dir, compare_note=compare_note, text_length=text_length, segment=segment)
+
+def get_loader(df, vocab, feature, name, batch_size,
+        shuffle, num_workers, period, data_dir,
+        compare_note, text_length, segment):
+    
+    Mimic = MIMICIIIDataset(vocab, df, name, feature, period, data_dir,
+        compare_note=compare_note, text_length=text_length, segment=segment
+    )
 
     data_loader = torch.utils.data.DataLoader(dataset=Mimic,
                                               batch_size=batch_size,
@@ -145,6 +158,7 @@ def get_loader(df, vocab, feature, name, batch_size, shuffle, num_workers, perio
                                               num_workers=num_workers,
                                               collate_fn=Mimic.collate_fn)
     return data_loader
+
 
 def get_loaders(args, is_test=False, is_feature=False):
     print(f"Note name : {args.name}")

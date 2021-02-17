@@ -9,6 +9,7 @@ import pandas as pd
 import Constants
 from nltk import word_tokenize
 
+
 class Vocabulary(object):
     """Simple vocabulary wrapper."""
     def __init__(self):
@@ -18,18 +19,19 @@ class Vocabulary(object):
         self.word_count = []
 
     def add_word(self, word):
-        if not word in self.word2idx:
+        if word in self.word2idx:
             self.word2idx[word] = self.idx
             self.idx2word[self.idx] = word
             self.idx += 1
 
     def __call__(self, word):
-        if not word in self.word2idx:
+        if word not in self.word2idx:
             return self.word2idx['<unk>']
         return self.word2idx[word]
 
     def __len__(self):
         return len(self.word2idx)
+
 
 def build_glove_voc(threshold, vocab, paragraph):
     data_path = '/corpus/glove/pretrained_vector/english/glove.42B.300d.{}'
@@ -52,8 +54,8 @@ def build_glove_voc(threshold, vocab, paragraph):
 
             count += 1
 
-
     return weight_matrix
+
 
 def clean_str_old(string):
     string = string.lower()
@@ -76,17 +78,17 @@ def clean_str_old(string):
     string = re.sub(r"\."," .", string)
     string = re.sub(r"\!"," !", string)
     string = re.sub(r"\,"," ,", string)
-    #string = re.sub(r" "," ", string)
     return string
 
+
 def clean_str(x):
-    y=re.sub('\\[(.*?)\\]','',x) #remove de-identified brackets
-    y=re.sub('[0-9]+\.','',y) #remove 1.2. since the segmenter segments based on this
-    y=re.sub('dr\.','doctor',y)
-    y=re.sub('m\.d\.','md',y)
-    y=re.sub('admission date:','',y)
-    y=re.sub('discharge date:','',y)
-    y=re.sub('--|__|==','',y)
+    y = re.sub('\\[(.*?)\\]', '', x)  # remove de-identified brackets
+    y = re.sub('[0-9]+\.', '', y)  # remove 1.2. since the segmenter segments based on this
+    y = re.sub('dr\.', 'doctor', y)
+    y = re.sub('m\.d\.', 'md', y)
+    y = re.sub('admission date:', '', y)
+    y = re.sub('discharge date:', '', y)
+    y = re.sub('--|__|==', '', y)
     return y
 
 
@@ -97,7 +99,7 @@ def build_vocab(list_files, dir_path, note_ids, threshold):
     df = pd.read_csv(list_files)
     print(len(df))
     for i, stay in enumerate(df['stay']):
-        if i % 500 == 0 :
+        if i % 500 == 0:
             print(i)
         for note_id in note_ids:
             note = pd.read_csv(os.path.join(dir_path, stay))
@@ -105,8 +107,6 @@ def build_vocab(list_files, dir_path, note_ids, threshold):
             note = note.lower()
             note = clean_str(note)
             tokens = word_tokenize(note)
-            #tokens = [t for t in tokens]
-            #print(tokens)
             counter.update(tokens)
 
 
@@ -132,23 +132,20 @@ def build_vocab(list_files, dir_path, note_ids, threshold):
             vocab.word_count.append(int(1))
     return vocab
 
+
 def main(args):
     if not os.path.exists(args.vocab_dir):
         os.makedirs(args.vocab_dir)
         print("Make Data Directory")
     vocab = build_vocab(args.list_file, args.data_path, args.note_ids,
                         threshold=args.threshold)
-    #W = build_glove_voc(len(vocab), vocab, args.paragraph)
     vocab_path = os.path.join(args.vocab_dir, f'{args.note}_{args.period}_{args.task}_vocab.pkl')
-    #weight_path = os.path.join(args.vocab_dir, 'W.pkl')
     with open(vocab_path, 'wb') as f:
         pickle.dump(vocab, f)
-    #with open(weight_path, 'wb') as f:
-    #    pickle.dump(W, f)
 
-    print("Total vocabulary size: %d" %len(vocab))
+    print("Total vocabulary size: %d" % len(vocab))
     print(vocab.word2idx)
-    print("Saved the vocabulary wrapper to '%s'" %vocab_path)
+    print("Saved the vocabulary wrapper to '%s'" % vocab_path)
 
 
 if __name__ == '__main__':

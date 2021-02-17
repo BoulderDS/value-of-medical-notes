@@ -14,6 +14,8 @@ import dataloader
 from build_vocab import Vocabulary
 from sklearn.metrics import roc_auc_score, average_precision_score, precision_recall_curve, auc
 import pandas as pd
+
+
 def train_epoch(model, training_data, optimizer, loss_fn, device, opt):
     ''' Epoch operation in training phase'''
 
@@ -38,20 +40,16 @@ def train_epoch(model, training_data, optimizer, loss_fn, device, opt):
         optimizer.step()
         # note keeping
         total_loss += loss.item()
-
-        count +=1
-        #if count%10==0:
-        #    print(f"Loss: {loss.item()}")
-        #print("===============================================\n")
-
+        count += 1
     loss = total_loss/count
     return loss
+
 
 def eval_epoch(model, validation_data, loss_fn, device, opt):
     ''' Epoch operation in evaluation phase '''
 
     model.eval()
-    count=0
+    count = 0
     total_loss = 0
     true_all = []
     pred_all = []
@@ -70,7 +68,7 @@ def eval_epoch(model, validation_data, loss_fn, device, opt):
             loss = loss_fn(pred, mortality.view(-1))
             # note keeping
             total_loss += loss.item()
-            count +=1
+            count += 1
             # probability
             true_all.append(mortality.view(-1))
             pred_all.append(F.softmax(pred)[:,1].view(-1))
@@ -90,6 +88,7 @@ def eval_epoch(model, validation_data, loss_fn, device, opt):
     print("Loss:", loss_per_word)
     return loss_per_word, (roc_auc, pr_auc, ap, p_at_1, p_at_5, p_at_10)
 
+
 def test(model, training_data, validation_data, test_data, loss_fn, device, opt):
     ''' Epoch operation in evaluation phase '''
     
@@ -97,7 +96,7 @@ def test(model, training_data, validation_data, test_data, loss_fn, device, opt)
     best_valid_scores = eval_epoch(model, validation_data, loss_fn, device, opt)[1]
 
     model.eval()
-    count=0
+    count = 0
     total_loss = 0
     true_all = []
     pred_all = []
@@ -116,10 +115,10 @@ def test(model, training_data, validation_data, test_data, loss_fn, device, opt)
             loss = loss_fn(pred, mortality.view(-1))
             # note keeping
             total_loss += loss.item()
-            count +=1
+            count += 1
             # probability
             true_all.append(mortality.view(-1))
-            pred_all.append(F.softmax(pred)[:,1].view(-1))
+            pred_all.append(F.softmax(pred)[:, 1].view(-1))
     true_all = torch.cat(true_all, axis=0)
     pred_all = torch.cat(pred_all, axis=0)
     roc_auc = roc_auc_score(true_all.cpu(), pred_all.cpu())
@@ -155,11 +154,13 @@ def test(model, training_data, validation_data, test_data, loss_fn, device, opt)
         f.write(f"valid,{best_valid_scores[0]},{best_valid_scores[1]},{best_valid_scores[2]},{best_valid_scores[3]},{best_valid_scores[4]},{best_valid_scores[5]}\n")
         f.write(f"test,{roc_auc},{pr_auc},{ap},{p_at_1},{p_at_5},{p_at_10}")
 
+
 def precision_at_k(y_label, y_pred, k):
     rank = list(zip(y_label, y_pred))
     rank.sort(key=lambda x: x[1], reverse=True)
     num_k = len(y_label)*k//100
     return sum(rank[i][0].item() == 1 for i in range(num_k))/float(num_k)
+
 
 def train(model, training_data, validation_data, optimizer, loss_fn, device, opt):
     ''' Start training '''
@@ -184,19 +185,17 @@ def train(model, training_data, validation_data, optimizer, loss_fn, device, opt
             log_train_file, log_valid_file))
 
         with open(log_train_file, 'w') as log_tf, open(log_valid_file, 'w') as log_vf:
-            #log_tf.write('epoch,loss,ppl,accuracy\n')
-            #log_vf.write('epoch,loss,ppl,accuracy\n')
             log_tf.write('epoch,loss,ppl\n')
             log_vf.write('epoch,loss,ppl\n')
 
     scheduler = ReduceLROnPlateau(optimizer, 'max', patience=3, factor=0.5)
     valid_losses = []
-    best = (0,0)
+    best = (0, 0)
     for epoch_i in range(opt.epoch):
         print('[ Epoch', epoch_i, ']')
 
         start = time.time()
-        train_loss  = train_epoch(
+        train_loss = train_epoch(
             model, training_data, optimizer, loss_fn, device, opt=opt)
 
         print('  - (Training)   loss: {loss: 8.5f}, '\
@@ -229,7 +228,7 @@ def train(model, training_data, validation_data, optimizer, loss_fn, device, opt
                 torch.save(checkpoint, model_name)
             elif opt.save_mode == 'best':
 
-                model_name = opt.task+'_'+opt.name +'_'+opt.period + '.chkpt'
+                model_name = opt.task+'_'+opt.name + '_'+opt.period + '.chkpt'
                 if opt.text:
                     model_name = "text_" + model_name
                 if opt.feature:
@@ -250,6 +249,7 @@ def train(model, training_data, validation_data, optimizer, loss_fn, device, opt
                     ppl=math.exp(min(train_loss, 100))))
 
     return best
+
 
 def main():
     ''' Main function '''
@@ -275,7 +275,6 @@ def main():
     parser.add_argument('-text_length', action='store_true', default=False)
     parser.add_argument('-segment', type=str, default=None)
 
-
     parser.add_argument('-log', type=str, default="/data/joe/physician_notes/Deep-Average-Network/log/")
     parser.add_argument('-save_model', default=True)
     parser.add_argument('-save_mode', type=str, choices=['all', 'best'], default='best')
@@ -289,11 +288,11 @@ def main():
     opt.log = f"{opt.data_dir}/Deep-Average-Network/log/"
     if not os.path.exists(opt.log):
         os.mkdir(opt.log)
-    #========= Loading Dataset =========#
+    # ========= Loading Dataset ========= #
     torch.manual_seed(1234)
     training_data, validation_data, test_data, vocab, feature_len = dataloader.get_loaders(opt, is_test=opt.test_mode, is_feature = opt.feature)
 
-    #========= Preparing Model =========#
+    # ========= Preparing Model ========= #
     print(opt)
 
     device = torch.device(f'cuda:{opt.device}' if opt.cuda else 'cpu')
@@ -307,7 +306,7 @@ def main():
     if not opt.test_mode:
         valid_best_scores = train(dan, training_data, validation_data, optimizer, loss_fn, device ,opt)
 
-    model_name = opt.task+'_'+opt.name +'_'+ opt.period + '.chkpt'
+    model_name = opt.task+'_'+opt.name + '_' + opt.period + '.chkpt'
     if opt.text:
         model_name = "text_" + model_name
     if opt.feature:
@@ -315,6 +314,6 @@ def main():
     checkpoint = torch.load(f"{opt.data_dir}/Deep-Average-Network/models/{model_name}", map_location=device)
     dan.load_state_dict(checkpoint['model'])
     test(dan, training_data, validation_data, test_data, loss_fn, device, opt)
-    #predict_prob(dan, test_data, loss_fn, device, opt)
+    # predict_prob(dan, test_data, loss_fn, device, opt)
 if __name__ == '__main__':
     main()
