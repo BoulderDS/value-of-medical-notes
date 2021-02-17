@@ -16,11 +16,11 @@ import numpy as np
 import pandas as pd
 import argparse
 
-
 def precision_at_k(y_label, y_pred, k):
     rank = list(zip(y_label, y_pred))
     rank.sort(key=lambda x: x[1], reverse=True)
-    return sum(rank[i][0] == 1 for i in range(k))/k
+    num_k = len(y_label)*k//100
+    return sum(rank[i][0] == 1 for i in range(num_k))/float(num_k)
 
 if __name__ == '__main__':
 
@@ -207,18 +207,18 @@ if __name__ == '__main__':
     val_roc = roc_auc_score(y_val, val_predicted)
     precision, recall, thresholds = precision_recall_curve(y_val, val_predicted)
     val_pr = auc(recall, precision)
+    val_p_at_1 = precision_at_k(y_val, val_predicted, 1)
+    val_p_at_5 = precision_at_k(y_val, val_predicted, 5)
     val_p_at_10 = precision_at_k(y_val, val_predicted, 10)
-    val_p_at_20 = precision_at_k(y_val, val_predicted, 20)
-    val_p_at_50 = precision_at_k(y_val, val_predicted, 50)
 
     test_predicted = pipeline.predict_proba(test_notes)[:, 1]
     test_ap = average_precision_score(y_test, test_predicted)
     test_roc = roc_auc_score(y_test, test_predicted)
     precision, recall, thresholds = precision_recall_curve(y_test, test_predicted)
     test_pr = auc(recall, precision)
+    test_p_at_1 = precision_at_k(y_test, test_predicted, 1)
+    test_p_at_5 = precision_at_k(y_test, test_predicted, 5)
     test_p_at_10 = precision_at_k(y_test, test_predicted, 10)
-    test_p_at_20 = precision_at_k(y_test, test_predicted, 20)
-    test_p_at_50 = precision_at_k(y_test, test_predicted, 50)
 
     # save result
     result_dir = "./models/logistic_regression/results/"
@@ -239,9 +239,9 @@ if __name__ == '__main__':
 
     print("Write Result to ", outname)
     with open(os.path.join(result_dir, args.task, args.note, outname), 'w') as f:
-        f.write("TYPE,ROCAUC,PRAUC,AP,P@10,P@20,P@50\n")
-        f.write(f"valid,{val_roc},{val_pr},{val_ap},{val_p_at_10},{val_p_at_20},{val_p_at_50}\n")
-        f.write(f"test,{test_roc},{test_pr},{test_ap},{test_p_at_10},{test_p_at_20},{test_p_at_50}\n")
+        f.write("TYPE,ROCAUC,PRAUC,AP,P@1,P@5,P@10\n")
+        f.write(f"valid,{val_roc},{val_pr},{val_ap},{val_p_at_1},{val_p_at_5},{val_p_at_10}\n")
+        f.write(f"test,{test_roc},{test_pr},{test_ap},{test_p_at_1},{test_p_at_5},{test_p_at_10}\n")
 
     if args.feature_used == "notes":
         tfidf_words = dict(pipeline.named_steps['union']

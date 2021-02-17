@@ -77,8 +77,8 @@ bash scripts/run_text_feature.sh
 We need to build patient2notes table first. 
 ```
 # at base dir. (~10 mins)
-python -m preprocessing.find_patient_with_sameNotes -data_dir /data/test_mimic_output/ -period 24
-python -m preprocessing.find_patient_with_sameNotes -data_dir /data/test_mimic_output/ -period retro
+python -m processing.find_patient_with_sameNotes -data_dir /data/test_mimic_output/ -period 24
+python -m processing.find_patient_with_sameNotes -data_dir /data/test_mimic_output/ -period retro
 ```
 ### Logistic Regression 
 Change `DATA_DIR` in `scripts/logistic_regression_compare_notes_pairwise.sh` and run
@@ -106,8 +106,16 @@ Change `model` in `scripts/sentence_select_similarity.sh` and `scripts/sentence_
 ### Deep Averaging Networks
 Change `model` in `scripts/sentence_select_similarity.sh` and `scripts/sentence_select.sh` to `DAN`.
 
-## 6. Note Portion Comparison Based on Length
-TODO: cleaning code
+## 6. Note Portion Comparison Based on Length (Quartile analysis)
+We first need to count number of tokens in admissions.
+```
+python -m processing.count_token -data_dir PATH_TO_PROCESSED_DATA_DIR -n_worker 60
+```
+Then, we will split selected sentences into each quartile.
+```
+python -m processing.quartile_split -data_dir PATH_TO_PROCESSED_DATA_DIR
+```
+Finally, you can now visualize plots in `notebooks/heurisitics_group_notes_plot-new.ipynb`.
 
 ## Troubleshooting
 1. `pandas` version might affect `python -m  mimic3preprocess.scripts.extract_subjects $DATA_DIR $OUTPUT_DIR`. Follow the env version if you have the same problem.
