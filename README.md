@@ -47,7 +47,7 @@ OUTPUT_DIR/readmission/all_note_{train/valid/test}_retro.csv
 
 ## 3. Train models with all information (structured/notes/structured+notes)
 Note that we use all notes but discharge summaries for mortality prediction and all notes for readmission prediction.
-
+After finishing following training, check performance here `notebooks/results_plots.ipynb`.
 ### Logistic regression
 We first train logistic regression on two tasks. 
 ```
