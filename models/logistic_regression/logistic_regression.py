@@ -188,19 +188,6 @@ if __name__ == '__main__':
     if not os.path.exists(result_dir+f"{args.task}/{args.note}"):
         os.mkdir(result_dir+f"{args.task}/{args.note}")
 
-    # outname = f'{args.feature_period}.csv'
-    # if args.feature_used == "all":
-    #     outname = "feature_text_" + outname
-    # elif args.feature_used == "notes":
-    #     outname = "text_" + outname
-    # else:
-    #     outname = "feature_" + outname
-
-    # print("Write Result to ", outname)
-    # with open(os.path.join(result_dir, args.task, args.note, outname), 'w') as f:
-    #     f.write("TYPE,ROCAUC,PRAUC\n")
-    #     f.write(f"valid,{val_roc},{val_pr}\n")
-    #     f.write(f"test,{test_roc},{test_pr}")
 
     val_predicted = pipeline.predict_proba(val_notes)[:, 1]
     val_ap = average_precision_score(y_val, val_predicted)

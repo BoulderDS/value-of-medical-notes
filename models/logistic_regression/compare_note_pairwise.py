@@ -38,9 +38,6 @@ def segmentSample(note_1, note_2, from_notes_1, from_notes_2,  is_token=False, i
     len_1 = sum(lengths_1)
     len_2 = sum(lengths_2)
     min_len = min(len_1, len_2)
-    # if from_notes_2[0]=="900002":
-    #     print(len_1, len_2)
-    #     print(note_1)
     if len_1 == min_len:
         sent_1 = " ".join(sentences_1)
     else:
@@ -53,12 +50,6 @@ def segmentSample(note_1, note_2, from_notes_1, from_notes_2,  is_token=False, i
         idxs_2 = np.arange(len(lengths_2))
         np.random.shuffle(idxs_2)
         sent_2, _ = utils.get_tokens(sentences_2,min_len,lengths_2,idxs_2,note_ids_2, is_percent=is_percent)
-
-    # if len(sentences) == 0:
-    #     return [""],["0"]
-    # idxs = np.arange(len(lengths))
-    # np.random.shuffle(idxs)
-    # bestsent, best_note_ids = utils.get_tokens(sentences,num,lengths,idxs,note_ids, is_percent=is_percent)
 
     
     return [sent_1], [sent_2]

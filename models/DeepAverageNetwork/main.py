@@ -198,10 +198,7 @@ def train(model, training_data, validation_data, optimizer, loss_fn, device, opt
         start = time.time()
         train_loss  = train_epoch(
             model, training_data, optimizer, loss_fn, device, opt=opt)
-        #print('  - (Training)   ppl: {ppl: 8.5f}, accuracy: {accu:3.3f} %, '\
-        #      'elapse: {elapse:3.3f} min'.format(
-        #          ppl=math.exp(min(train_loss, 100)), accu=100*train_accu,
-        #          elapse=(time.time()-start)/60))
+
         print('  - (Training)   loss: {loss: 8.5f}, '\
               'elapse: {elapse:3.3f} min'.format(
                   loss=train_loss,
@@ -213,10 +210,7 @@ def train(model, training_data, validation_data, optimizer, loss_fn, device, opt
                 'elapse: {elapse:3.3f} min'.format(
                     ppl=math.exp(min(valid_loss, 100)), accu=valid_results[0], prauc=valid_results[2],
                     elapse=(time.time()-start)/60))
-        #print('  - (Validation) loss: {loss: 8.5f}, '\
-        #        'elapse: {elapse:3.3f} min'.format(
-        #            loss=valid_loss,
-        #            elapse=(time.time()-start)/60))
+
         scheduler.step(valid_results[2])
         valid_losses += [valid_results[2]]
 
@@ -248,18 +242,13 @@ def train(model, training_data, validation_data, optimizer, loss_fn, device, opt
 
         if log_train_file and log_valid_file:
             with open(log_train_file, 'a') as log_tf, open(log_valid_file, 'a') as log_vf:
-                #log_tf.write('{epoch},{loss: 8.5f},{ppl: 8.5f},{accu:3.3f}\n'.format(
-                #    epoch=epoch_i, loss=train_loss,
-                #    ppl=math.exp(min(train_loss, 100)), accu=100*train_accu))
                 log_vf.write('{epoch},{loss: 8.5f},{ppl: 8.5f},{accu:3.3f},{prauc}\n'.format(
                     epoch=epoch_i, loss=valid_loss,
                     ppl=math.exp(min(valid_loss, 100)), accu=valid_results[0], prauc=valid_results[2]))
                 log_tf.write('{epoch},{loss: 8.5f},{ppl: 8.5f}\n'.format(
                     epoch=epoch_i, loss=train_loss,
                     ppl=math.exp(min(train_loss, 100))))
-                #log_vf.write('{epoch},{loss: 8.5f},{ppl: 8.5f}\n'.format(
-                #    epoch=epoch_i, loss=valid_loss,
-                #    ppl=math.exp(min(valid_loss, 100))))
+
     return best
 
 def main():
