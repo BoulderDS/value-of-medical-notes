@@ -55,7 +55,7 @@ python -m mimic3preprocess.scripts.get_validation --path $OUTPUT_DIR --task mort
 echo "Create Notes for mortality prediction"
 for n in all_but_discharge #physician physician_nursing all_but_discharge all
 do
-(python -m mimic3preprocess.scripts.create_in_hospital_mortality_note $OUTPUT_DIR $OUTPUT_DIR/mortality/ $n 24)&
+(python -m mimic3preprocess.scripts.create_in_hospital_mortality_note $OUTPUT_DIR $OUTPUT_DIR/mortality/ $n 24)
 #(python -m mimic3preprocess.scripts.create_in_hospital_mortality_note $OUTPUT_DIR $OUTPUT_DIR/mortality/ $n 48)&
 #(python -m mimic3preprocess.scripts.create_in_hospital_mortality_note $OUTPUT_DIR $OUTPUT_DIR/mortality/ $n -1)&
 #done
@@ -79,7 +79,7 @@ python -m mimic3preprocess.scripts.create_readmission $OUTPUT_DIR $OUTPUT_DIR/re
 echo "Create list of admission with at least one note for readmission"
 for n in  all #discharge
 do
-(python -m mimic3preprocess.scripts.create_in_hospital_mortality_note $OUTPUT_DIR $OUTPUT_DIR/readmission/ $n -1)&
+(python -m mimic3preprocess.scripts.create_in_hospital_mortality_note $OUTPUT_DIR $OUTPUT_DIR/readmission/ $n -1)
 done
 
 echo "Train/Val/Test split on readmission task"
