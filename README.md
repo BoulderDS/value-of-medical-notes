@@ -12,7 +12,7 @@ python -m spacy download en_core_web_sm
 ```
 
 ## 2. Preprocessing MIMIC-III
-First, you need to download MIMIC-III dataset as csv files into your machine.
+First, you need to download [MIMIC-III](https://mimic.physionet.org/gettingstarted/access/) dataset as csv files to your machine.
 Then change env variables in `scripts.mimic3preprocess.sh` for preprocessing.
 ```
 export NUM_WORKER=32 # number of threads for multithreading
@@ -115,6 +115,7 @@ Then, we will split selected sentences into each quartile.
 ```
 python -m processing.quartile_split -data_dir PATH_TO_PROCESSED_DATA_DIR
 ```
+It's fine to have this error `FileNotFoundError: [Errno 2] No such file or directory: '/data/test_mimic_output//select_sentence/DAN/mortality'` if you have run previous step with DAN.
 Finally, you can now visualize plots in `notebooks/heurisitics_group_notes_plot-new.ipynb`.
 
 ## Troubleshooting
