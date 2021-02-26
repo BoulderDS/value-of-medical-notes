@@ -5,7 +5,7 @@ This repository is the implementation of [Characterizing the Value of Informatio
 # Table of Contents
 1. [Environment](#1-environment)
 2. [Preprocessing MIMIC-III](#2-preprocessing-mimic-iii)
-3. [Train models with all information (structured/notes/structured+notes)](#3-train-models-with-all-information-structurednotesstructured+notes)
+3. [Train models with all information (structured/notes/structured+notes)](#3-train-models-with-all-information-structurednotesstructurednotes)
 4. [Note Type Comparison](#4-note-type-comparison)
 5. [Note Portion Comparison](#5-note-portion-comparison)
 6. [Note Portion Comparison Based on Length (Quartile analysis)](#6-note-portion-comparison-based-on-length-quartile-analysis)
