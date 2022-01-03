@@ -77,10 +77,17 @@ echo "Create Readmission task"
 python -m mimic3preprocess.scripts.create_readmission $OUTPUT_DIR $OUTPUT_DIR/readmission/
 
 echo "Create list of admission with at least one note for readmission"
-for n in  all #discharge
+for n in  all 
 do
 (python -m mimic3preprocess.scripts.create_in_hospital_mortality_note $OUTPUT_DIR $OUTPUT_DIR/readmission/ $n -1)
 done
+
+## Use this for discharge note only
+# echo "Create list of admission with discharge note for readmission"
+# for n in discharge
+# do
+# (python -m mimic3preprocess.scripts.create_in_hospital_mortality_discharge_note $OUTPUT_DIR $OUTPUT_DIR/readmission/ $n -1)
+# done
 
 echo "Train/Val/Test split on readmission task"
 python -m mimic3preprocess.scripts.get_validation --path $OUTPUT_DIR --task readmission --period retro

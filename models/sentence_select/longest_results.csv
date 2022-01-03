@@ -1,9 +1,0 @@
-task,model,note,period,test_pr,test_roc
-mortality,DAN,physician,24,0.184,0.582
-mortality,DAN,physician,48,0.140,0.621
-mortality,DAN,physician,retro,0.331,0.716
-mortality,LR,physician,24,0.217,0.670
-mortality,LR,physician,48,0.234,0.758
-mortality,LR,physician,retro,0.473,0.830
-readmission,DAN,discharge,retro,0.123,0.628
-readmission,LR,discharge,retro,0.121,0.652

@@ -23,8 +23,8 @@ print("test length:", len(test_listfile))
 
 
 
-physician_train_mortality = pd.read_csv(f"/data/joe/physician_notes/mimic-data/{args.task}/train_{args.note}_{args.period}_listfile.csv")
-physician_test_mortality = pd.read_csv(f"/data/joe/physician_notes/mimic-data/{args.task}/test_{args.note}_{args.period}_listfile.csv")
+physician_train_mortality = pd.read_csv(f"{args.path}/{args.task}/train_{args.note}_{args.period}_listfile.csv")
+physician_test_mortality = pd.read_csv(f"{args.path}/{args.task}/test_{args.note}_{args.period}_listfile.csv")
 physician_mortality = physician_train_mortality.append(physician_test_mortality, ignore_index = True)
 
 train_listfile = train_listfile[train_listfile['stay'].isin(physician_mortality['stay'])]

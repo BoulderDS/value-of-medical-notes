@@ -2,7 +2,7 @@ anyio==2.1.0
 argon2-cffi==20.1.0
 async-generator==1.10
 attrs==20.3.0
-Babel==2.9.0
+Babel==2.9.1
 backcall==0.2.0
 beautifulsoup4==4.9.3
 bleach==3.3.0
@@ -48,7 +48,7 @@ nbclient==0.5.2
 nbconvert==6.0.7
 nbformat==5.1.2
 nest-asyncio==1.5.1
-nltk==3.4.5
+nltk==3.6.5
 notebook==6.4.1
 numpy @ file:///tmp/build/80754af9/numpy_and_numpy_base_1603479632437/work
 packaging==20.9

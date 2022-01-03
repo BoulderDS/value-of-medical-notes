@@ -48,7 +48,7 @@ def process_partition(args, partition, eps = 1e-6):
 
             output_ts_filename = patient + "_" + ts_filename
 
-            ts_df.to_csv(os.path.join(output_dir, output_ts_filename), index = False)
+            # ts_df.to_csv(os.path.join(output_dir, output_ts_filename), index = False)
 
             xy_pairs.append((output_ts_filename, mortality))
 
