@@ -48,7 +48,7 @@ nbclient==0.5.2
 nbconvert==6.0.7
 nbformat==5.1.2
 nest-asyncio==1.5.1
-nltk==3.6.5
+nltk==3.6.6
 notebook==6.4.1
 numpy @ file:///tmp/build/80754af9/numpy_and_numpy_base_1603479632437/work
 packaging==20.9
