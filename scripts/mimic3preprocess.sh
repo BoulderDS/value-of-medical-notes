@@ -1,105 +1,105 @@
 #!/usr/bin/env bash
 
 export NUM_WORKER=64 # number of threads for multithreading
-export DATA_DIR=/data/joe/physician_notes/mimic-data/ #path to your mimic csv files 
-export OUTPUT_DIR=/data/test_mimic_output/
+export DATA_DIR=/data/mimic_iii/physionet.org/files/mimiciii/1.4/ #path to your mimic csv files 
+export OUTPUT_DIR=/data/mimic_iii/test_mimic_output_joe/
 
 mkdir -p $OUTPUT_DIR
 
 set -x
-echo "Extract Subjects"
-python -m  mimic3preprocess.scripts.extract_subjects $DATA_DIR $OUTPUT_DIR --n_workers $NUM_WORKER
-echo "Train Test Split"
-python -m mimic3preprocess.scripts.split_train_and_test $OUTPUT_DIR
-echo "Extract Episodes from Subjects wit CGID"
-python -m mimic3preprocess.scripts.extract_episodes_from_subjects_multiprocessing $OUTPUT_DIR $NUM_WORKER
+# echo "Extract Subjects"
+# python -m  mimic3preprocess.scripts.extract_subjects $DATA_DIR $OUTPUT_DIR --n_workers $NUM_WORKER
+# echo "Train Test Split"
+# python -m mimic3preprocess.scripts.split_train_and_test $OUTPUT_DIR
+# echo "Extract Episodes from Subjects wit CGID"
+# python -m mimic3preprocess.scripts.extract_episodes_from_subjects_multiprocessing $OUTPUT_DIR $NUM_WORKER
 
 
-echo "Create features in 24 hours"
-python -m mimic3preprocess.scripts.feature_extraction_multiprocessing --num_worker $NUM_WORKER --period_length 24 --output_dir $OUTPUT_DIR/features_24/
-# echo "Create features in 48 hours"
-# python -m mimic3preprocess.scripts.feature_extraction_multiprocessing --num_worker $NUM_WORKER --period_length 48 --output_dir $OUTPUT_DIR/features_48/
-echo "Create features in all admission"
-python -m mimic3preprocess.scripts.feature_extraction_multiprocessing --num_worker $NUM_WORKER --period_length -1 --output_dir $OUTPUT_DIR/features_retro/
+# echo "Create features in 24 hours"
+# python -m mimic3preprocess.scripts.feature_extraction_multiprocessing --num_worker $NUM_WORKER --period_length 24 --output_dir $OUTPUT_DIR/features_24/
+# # echo "Create features in 48 hours"
+# # python -m mimic3preprocess.scripts.feature_extraction_multiprocessing --num_worker $NUM_WORKER --period_length 48 --output_dir $OUTPUT_DIR/features_48/
+# echo "Create features in all admission"
+# python -m mimic3preprocess.scripts.feature_extraction_multiprocessing --num_worker $NUM_WORKER --period_length -1 --output_dir $OUTPUT_DIR/features_retro/
 
-echo "Merge features in 24 hours"
-python -m mimic3preprocess.scripts.merge_features  ./mimic3preprocess/resources/ $OUTPUT_DIR/features_24/
-# echo "Merge features in 48 hours"
-# python -m mimic3preprocess.scripts.merge_features $DATA_DIR/in_hospital_retro/ $OUTPUT_DIR/features_48/
-echo "Merge features in all admission"
-python -m mimic3preprocess.scripts.merge_features  ./mimic3preprocess/resources/ $OUTPUT_DIR/features_retro/
+# echo "Merge features in 24 hours"
+# python -m mimic3preprocess.scripts.merge_features  ./mimic3preprocess/resources/ $OUTPUT_DIR/features_24/
+# # echo "Merge features in 48 hours"
+# # python -m mimic3preprocess.scripts.merge_features $DATA_DIR/in_hospital_retro/ $OUTPUT_DIR/features_48/
+# echo "Merge features in all admission"
+# python -m mimic3preprocess.scripts.merge_features  ./mimic3preprocess/resources/ $OUTPUT_DIR/features_retro/
 
-echo "Create timeseries features in 24 hours"
-python -m mimic3preprocess.scripts.timeseries_feature_extraction_multiprocessing --num_worker $NUM_WORKER --period_length 24 --output_dir $OUTPUT_DIR/timeseries_features_24/
-# echo "Create timeseries features in 48 hours"
-# python -m mimic3preprocess.scripts.timeseries_feature_extraction_multiprocessing --num_worker $NUM_WORKER --period_length 48 --output_dir $OUTPUT_DIR/timeseries_features_48/
-echo "Create timeseries features in all admission"
-python -m mimic3preprocess.scripts.timeseries_feature_extraction_multiprocessing --num_worker $NUM_WORKER --period_length -1 --output_dir $OUTPUT_DIR/timeseries_features_retro/
+# echo "Create timeseries features in 24 hours"
+# python -m mimic3preprocess.scripts.timeseries_feature_extraction_multiprocessing --num_worker $NUM_WORKER --period_length 24 --output_dir $OUTPUT_DIR/timeseries_features_24/
+# # echo "Create timeseries features in 48 hours"
+# # python -m mimic3preprocess.scripts.timeseries_feature_extraction_multiprocessing --num_worker $NUM_WORKER --period_length 48 --output_dir $OUTPUT_DIR/timeseries_features_48/
+# echo "Create timeseries features in all admission"
+# python -m mimic3preprocess.scripts.timeseries_feature_extraction_multiprocessing --num_worker $NUM_WORKER --period_length -1 --output_dir $OUTPUT_DIR/timeseries_features_retro/
 
-######################
-# Start process mortality
-######################
+# ######################
+# # Start process mortality
+# ######################
 
-echo "Create In-Hospital Mortality for 24 hours"
-(python -m mimic3preprocess.scripts.create_in_hospital_mortality $OUTPUT_DIR $OUTPUT_DIR/mortality/ 24)
-#echo "Create In-Hospital Mortality for 48 hours"
-#(python -m mimic3preprocess.scripts.create_in_hospital_mortality $OUTPUT_DIR $OUTPUT_DIR/mortality/ 48)
-#echo "Create In-Hospital Mortality for retro"
-#(python -m mimic3preprocess.scripts.create_in_hospital_mortality $OUTPUT_DIR $OUTPUT_DIR/mortality/ -1)
+# echo "Create In-Hospital Mortality for 24 hours"
+# (python -m mimic3preprocess.scripts.create_in_hospital_mortality $OUTPUT_DIR $OUTPUT_DIR/mortality/ 24)
+# #echo "Create In-Hospital Mortality for 48 hours"
+# #(python -m mimic3preprocess.scripts.create_in_hospital_mortality $OUTPUT_DIR $OUTPUT_DIR/mortality/ 48)
+# #echo "Create In-Hospital Mortality for retro"
+# #(python -m mimic3preprocess.scripts.create_in_hospital_mortality $OUTPUT_DIR $OUTPUT_DIR/mortality/ -1)
 
-echo "Train valid split mortality prediction task"
-python -m mimic3preprocess.scripts.get_validation --path $OUTPUT_DIR --task mortality --period 24
-#python -m mimic3preprocess.scripts.get_validation --path $OUTPUT_DIR --task mortality --period 48
-#python -m mimic3preprocess.scripts.get_validation --path $OUTPUT_DIR --task mortality --period retro
+# echo "Train valid split mortality prediction task"
+# python -m mimic3preprocess.scripts.get_validation --path $OUTPUT_DIR --task mortality --period 24
+# #python -m mimic3preprocess.scripts.get_validation --path $OUTPUT_DIR --task mortality --period 48
+# #python -m mimic3preprocess.scripts.get_validation --path $OUTPUT_DIR --task mortality --period retro
 
-echo "Create Notes for mortality prediction"
-for n in all_but_discharge #physician physician_nursing all_but_discharge all
-do
-(python -m mimic3preprocess.scripts.create_in_hospital_mortality_note $OUTPUT_DIR $OUTPUT_DIR/mortality/ $n 24)
-#(python -m mimic3preprocess.scripts.create_in_hospital_mortality_note $OUTPUT_DIR $OUTPUT_DIR/mortality/ $n 48)&
-#(python -m mimic3preprocess.scripts.create_in_hospital_mortality_note $OUTPUT_DIR $OUTPUT_DIR/mortality/ $n -1)&
-#done
-
-
-echo "Create list of admission with at least one note (except discharge summary) for mortality given time span"
-for p in 24  #48 retro
-do
-    for n in all_but_discharge # physician  physician_nursing
-    do
-    python -m mimic3preprocess.scripts.get_data_with_notes --path $OUTPUT_DIR --task mortality --period $p --note $n
-    done
-done
-
-######################
-# Start process readmission
-######################
-echo "Create Readmission task"
-python -m mimic3preprocess.scripts.create_readmission $OUTPUT_DIR $OUTPUT_DIR/readmission/
-
-echo "Create list of admission with at least one note for readmission"
-for n in  all 
-do
-(python -m mimic3preprocess.scripts.create_in_hospital_mortality_note $OUTPUT_DIR $OUTPUT_DIR/readmission/ $n -1)
-done
-
-## Use this for discharge note only
-# echo "Create list of admission with discharge note for readmission"
-# for n in discharge
+# echo "Create Notes for mortality prediction"
+# for n in all_but_discharge #physician physician_nursing all_but_discharge all
 # do
-# (python -m mimic3preprocess.scripts.create_in_hospital_mortality_discharge_note $OUTPUT_DIR $OUTPUT_DIR/readmission/ $n -1)
+# (python -m mimic3preprocess.scripts.create_in_hospital_mortality_note $OUTPUT_DIR $OUTPUT_DIR/mortality/ $n 24)
+# #(python -m mimic3preprocess.scripts.create_in_hospital_mortality_note $OUTPUT_DIR $OUTPUT_DIR/mortality/ $n 48)&
+# #(python -m mimic3preprocess.scripts.create_in_hospital_mortality_note $OUTPUT_DIR $OUTPUT_DIR/mortality/ $n -1)&
+# #done
+
+
+# echo "Create list of admission with at least one note (except discharge summary) for mortality given time span"
+# for p in 24  #48 retro
+# do
+#     for n in all_but_discharge # physician  physician_nursing
+#     do
+#     python -m mimic3preprocess.scripts.get_data_with_notes --path $OUTPUT_DIR --task mortality --period $p --note $n
+#     done
 # done
 
-echo "Train/Val/Test split on readmission task"
-python -m mimic3preprocess.scripts.get_validation --path $OUTPUT_DIR --task readmission --period retro
+# ######################
+# # Start process readmission
+# ######################
+# echo "Create Readmission task"
+# python -m mimic3preprocess.scripts.create_readmission $OUTPUT_DIR $OUTPUT_DIR/readmission/
 
-echo "Create data with note"
-for p in retro
+# echo "Create list of admission with at least one note for readmission"
+# for n in  all 
+# do
+# (python -m mimic3preprocess.scripts.create_in_hospital_mortality_note $OUTPUT_DIR $OUTPUT_DIR/readmission/ $n -1)
+# done
+
+# Use this for discharge note only
+echo "Create list of admission with discharge note for readmission"
+for n in discharge
 do
-    for n in all #all_but_discharge # physician  physician_nursing
-    do
-    python -m mimic3preprocess.scripts.get_data_with_notes --path $OUTPUT_DIR --task readmission --period $p --note $n
-    done
+(python -m mimic3preprocess.scripts.create_in_hospital_mortality_discharge_note $OUTPUT_DIR $OUTPUT_DIR/readmission/ -1)
 done
+
+# echo "Train/Val/Test split on readmission task"
+# python -m mimic3preprocess.scripts.get_validation --path $OUTPUT_DIR --task readmission --period retro
+
+# echo "Create data with note"
+# for p in retro
+# do
+#     for n in all #all_but_discharge # physician  physician_nursing
+#     do
+#     python -m mimic3preprocess.scripts.get_data_with_notes --path $OUTPUT_DIR --task readmission --period $p --note $n
+#     done
+# done
 
 
 # echo "Create Only Discharge Notes"
